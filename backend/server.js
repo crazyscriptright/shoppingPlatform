@@ -1,13 +1,15 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { loadEnvironment } from "./middleware/envloader.js";
 import authRoutes from "./routes/auth.js";
 import productRoutes from "./routes/products.js";
 import adminRoutes from "./routes/admin.js";
 import collectionsRoutes from "./routes/collections.js";
 import ordersRoutes from "./routes/orders.js";
 
-dotenv.config();
+// Load environment configuration
+loadEnvironment();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
