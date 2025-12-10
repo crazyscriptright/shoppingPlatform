@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { Filter, Grid, List } from "lucide-react";
 import ProductCard from "../components/ProductCard";
 import Button from "../components/Button";
@@ -7,6 +7,8 @@ import api from "../services/api";
 
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -55,6 +57,29 @@ const Shop = () => {
     { value: "price-desc", label: "Price: High to Low" },
     { value: "popular", label: "Most Popular" },
   ];
+
+  const clearFilters = useCallback(() => {
+    setFilters({
+      category: "",
+      minPrice: "",
+      maxPrice: "",
+      sort: "newest",
+    });
+    setPriceInputs({
+      minPrice: "",
+      maxPrice: "",
+    });
+    setSearchParams({});
+    setPage(1);
+    setHasMore(true);
+  }, [setSearchParams]);
+
+  useEffect(() => {
+    if (location.state?.resetFilters) {
+      clearFilters();
+      navigate(location.pathname, { replace: true, state: null });
+    }
+  }, [location.state, location.pathname, clearFilters, navigate]);
 
   useEffect(() => {
     setProducts([]);
@@ -140,21 +165,16 @@ const Shop = () => {
     }
   };
 
-  const clearFilters = () => {
-    setFilters({
-      category: "",
-      minPrice: "",
-      maxPrice: "",
-      sort: "newest",
-    });
-    setPriceInputs({
-      minPrice: "",
-      maxPrice: "",
-    });
-    setSearchParams({});
-    setPage(1);
-    setHasMore(true);
-  };
+  const handleExternalReset = useCallback(() => {
+    clearFilters();
+  }, [clearFilters]);
+
+  useEffect(() => {
+    window.addEventListener("shop:resetFilters", handleExternalReset);
+    return () => {
+      window.removeEventListener("shop:resetFilters", handleExternalReset);
+    };
+  }, [handleExternalReset]);
 
   return (
     <div className="min-h-screen bg-off-white py-8">

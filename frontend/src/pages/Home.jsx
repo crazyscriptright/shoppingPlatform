@@ -81,7 +81,7 @@ const Home = () => {
                 alt="Fashion Model"
                 className="w-full h-auto"
                 loading="eager"
-                fetchpriority="high"
+                fetchPriority="high"
                 decoding="async"
               />
             </div>

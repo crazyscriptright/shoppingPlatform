@@ -16,6 +16,19 @@ const Header = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleSearch = () => setIsSearchOpen(!isSearchOpen);
 
+  const handleShopNav = (event) => {
+    event?.preventDefault();
+
+    if (window.location.pathname === "/shop") {
+      window.dispatchEvent(new Event("shop:resetFilters"));
+    }
+
+    setIsMenuOpen(false);
+    navigate("/shop", {
+      state: { resetFilters: true, ts: Date.now() },
+    });
+  };
+
   const handleUserMenuEnter = () => {
     if (userMenuTimeout) {
       clearTimeout(userMenuTimeout);
@@ -43,7 +56,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 flex-shrink-0">
             <img
-              src="/favicon_io/apple-touch-icon.png"
+              src="/logo.png"
               alt="Flipcard Logo"
               className="h-10 w-auto object-contain"
             />
@@ -70,6 +83,7 @@ const Header = () => {
             </Link>
             <Link
               to="/shop"
+              onClick={handleShopNav}
               className="text-dark-grey hover:text-soft-teal transition text-sm"
             >
               Shop
@@ -220,7 +234,7 @@ const Header = () => {
             </Link>
             <Link
               to="/shop"
-              onClick={toggleMenu}
+              onClick={handleShopNav}
               className="block py-2 px-2 text-dark-grey hover:bg-soft-teal/10 hover:text-soft-teal transition rounded text-sm font-medium"
             >
               Shop
