@@ -1,4 +1,9 @@
 import pkg from "pg";
+import { loadEnvironment } from "../middleware/envloader.js";
+
+// Ensure environment variables are loaded before configuring the pool
+loadEnvironment();
+
 const { Pool } = pkg;
 
 // Heroku provides DATABASE_URL, otherwise use individual env variables
@@ -18,10 +23,6 @@ const pool = new Pool(
         password: process.env.DB_PASSWORD,
       }
 );
-
-pool.on("connect", () => {
-  console.log("✅ Database connected successfully");
-});
 
 pool.on("error", (err) => {
   console.error("Unexpected database error:", err);

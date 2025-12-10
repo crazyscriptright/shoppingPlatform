@@ -7,13 +7,18 @@ import path from "path";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 
+let isLoaded = false;
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function loadEnvironment() {
-  const env = process.env.NODE_ENV;
+function loadEnvironment({ force = false } = {}) {
+  if (isLoaded && !force) {
+    return;
+  }
 
-  console.log("🔧 [INS_ENV_LOADER] Loading environment:", env);
+  isLoaded = true;
+  const env = process.env.NODE_ENV;
 
   let envFile;
 
@@ -28,7 +33,6 @@ function loadEnvironment() {
 
   // Resolve to backend root directory (one level up from middleware)
   const envPath = path.resolve(__dirname, "..", envFile);
-  console.log("🔧 [INS_ENV_LOADER] Loading env file:", envPath);
 
   const result = dotenv.config({ path: envPath });
 
@@ -38,23 +42,8 @@ function loadEnvironment() {
       result.error.message
     );
     // Fallback to default .env
-    console.log("🔄 [INS_ENV_FALLBACK] Loading default .env file");
     dotenv.config();
-  } else {
-    console.log("✅ [INS_ENV_SUCCESS] Environment loaded successfully");
   }
-
-  // Log current configuration (without sensitive data)
-  console.log("🔧 [INS_ENV_CONFIG]", {
-    environment: env,
-    port: process.env.PORT,
-    hasJwtSecret: !!process.env.JWT_SECRET,
-    hasCorsOrigin: !!process.env.CORS_ORIGIN,
-    frontendUrl: process.env.FRONTEND_URL,
-    dbConfig: process.env.DATABASE_URL
-      ? "Using DATABASE_URL"
-      : `${process.env.DB_HOST}:${process.env.DB_PORT}`,
-  });
 }
 
 export { loadEnvironment };
