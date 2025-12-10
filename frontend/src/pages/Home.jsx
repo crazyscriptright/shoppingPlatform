@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, TrendingUp, Star } from "lucide-react";
-import heroImage from "../assets/hero.webp";
 import ProductCard from "../components/ProductCard";
 import Button from "../components/Button";
 import api from "../services/api";
@@ -78,7 +77,7 @@ const Home = () => {
             {/* Right side - Hero Image (fixed in background on desktop) */}
             <div className="hero-image-wrapper">
               <img
-                src={heroImage}
+                src="/hero.webp"
                 alt="Fashion Model"
                 className="w-full h-auto"
                 loading="eager"
