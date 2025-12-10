@@ -41,16 +41,23 @@ const Header = () => {
         {/* Top Bar */}
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex flex-col leading-tight flex-shrink-0">
-            <span
-              className="text-xl lg:text-2xl font-semibold text-dark-grey"
-              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-            >
-              Flipcard
-            </span>
-            <span className="text-[9px] tracking-wider text-dark-grey/50 uppercase">
-              D'Florencis
-            </span>
+          <Link to="/" className="flex items-center gap-3 flex-shrink-0">
+            <img
+              src="/favicon_io/apple-touch-icon.png"
+              alt="Flipcard Logo"
+              className="h-10 w-auto object-contain"
+            />
+            <div className="flex flex-col leading-tight">
+              <span
+                className="text-xl lg:text-2xl font-semibold text-dark-grey"
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              >
+                Flipcard
+              </span>
+              <span className="text-[9px] tracking-wider text-dark-grey/50 uppercase">
+                D'Florencis
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation - Centered */}
