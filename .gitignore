@@ -2,3 +2,5 @@
 */.env
 */.env.production
 */dist
+.vercel
+.DS_Store

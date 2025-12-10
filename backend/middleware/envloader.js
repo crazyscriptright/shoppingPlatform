@@ -26,7 +26,8 @@ function loadEnvironment() {
       break;
   }
 
-  const envPath = path.resolve(__dirname, envFile);
+  // Resolve to backend root directory (one level up from middleware)
+  const envPath = path.resolve(__dirname, "..", envFile);
   console.log("🔧 [INS_ENV_LOADER] Loading env file:", envPath);
 
   const result = dotenv.config({ path: envPath });
