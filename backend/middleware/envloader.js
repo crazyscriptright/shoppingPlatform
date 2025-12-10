@@ -47,15 +47,13 @@ function loadEnvironment() {
   // Log current configuration (without sensitive data)
   console.log("🔧 [INS_ENV_CONFIG]", {
     environment: env,
-    port: process.env.PORTINS,
+    port: process.env.PORT,
     hasJwtSecret: !!process.env.JWT_SECRET,
-    hasLabSecret: !!process.env.JWT_SECRET_LABS,
-    mainServerUrl: process.env.MAIN_SERVER_URL,
-    hasInsDbUrl: !!process.env.INS_DATABASE_URL,
-    frontendUrl:
-      env === "development"
-        ? process.env.FRONTEND_URLDEV
-        : process.env.FRONTEND_URL,
+    hasCorsOrigin: !!process.env.CORS_ORIGIN,
+    frontendUrl: process.env.FRONTEND_URL,
+    dbConfig: process.env.DATABASE_URL
+      ? "Using DATABASE_URL"
+      : `${process.env.DB_HOST}:${process.env.DB_PORT}`,
   });
 }
 
