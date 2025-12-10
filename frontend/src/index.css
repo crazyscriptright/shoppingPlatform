@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  font-family: "Freight Display Pro", "Playfair Display", Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fdfdff;
+  color: #393d3f;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* Hero section responsive grid */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* Hero text with proper spacing */
+.hero-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0;
+  margin-right: 1rem;
+  position: relative;
+  z-index: 10;
+  background: transparent;
+}
+
+/* Ensure content sections scroll over the background image */
+section:not(:first-of-type) {
+  position: relative;
+  z-index: 10;
+  background: inherit;
+}
+
+/* Hero image stays fixed in background */
+.hero-image-wrapper {
+  position: fixed;
+  top: 64px;
+  right: 0;
+  width: 100%;
+  height: auto;
+  max-height: 700px;
+  z-index: 0;
+}
+
+.hero-image-wrapper img {
+  width: 100%;
+  height: auto;
+  max-height: 700px;
+  object-fit: contain;
+  object-position: top center;
+}
+
+@media (min-width: 1024px) {
+  .hero-image-wrapper {
+    width: 50%;
+    max-height: 800px;
+  }
+
+  .hero-image-wrapper img {
+    max-height: 800px;
+  }
+}
+
+/* Hero section responsive grid */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* Hero text with proper spacing - centered vertically relative to image */
+.hero-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 500px;
+  padding-left: 0;
+}
+
+@media (min-width: 1024px) {
+  .hero-text-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    min-height: 600px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-text-container {
+    min-height: 700px;
+  }
+}
+
+/* Ensure proper grid spacing */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: minmax(400px, 1fr) minmax(400px, 1fr);
+    gap: 3rem;
+  }
+}
+
+/* Hero text container */
+.hero-text {
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-text {
+    padding-left: 2rem;
+    padding-right: 3rem;
+  }
+}
