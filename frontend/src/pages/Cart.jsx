@@ -72,7 +72,7 @@ const Cart = () => {
                 className="bg-warm-grey rounded-lg p-6 flex gap-6"
               >
                 {/* Product Image */}
-                <div className="w-32 h-32 bg-off-white rounded-lg overflow-hidden flex-shrink-0">
+                <div className="w-32 h-32 bg-off-white rounded-lg overflow-hidden shrink-0">
                   <img
                     src={item.image || "/placeholder-product.jpg"}
                     alt={item.name}

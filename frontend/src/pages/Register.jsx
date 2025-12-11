@@ -206,7 +206,7 @@ const Register = () => {
               <input
                 type="checkbox"
                 required
-                className="rounded border-warm-grey/50 text-soft-teal focus:ring-soft-teal w-4 h-4 mt-0.5 flex-shrink-0"
+                className="rounded border-warm-grey/50 text-soft-teal focus:ring-soft-teal w-4 h-4 mt-0.5 shrink-0"
               />
               <label className="text-xs sm:text-sm text-dark-grey/70">
                 I agree to the{" "}

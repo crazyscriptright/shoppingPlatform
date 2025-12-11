@@ -54,7 +54,7 @@ const Header = () => {
         {/* Top Bar */}
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 flex-shrink-0">
+          <Link to="/" className="flex items-center gap-3 shrink-0">
             <img
               src="/logo.png"
               alt="Flipcard Logo"
@@ -111,7 +111,7 @@ const Header = () => {
           </nav>
 
           {/* Right Side Icons */}
-          <div className="flex items-center gap-4 flex-shrink-0">
+          <div className="flex items-center gap-4 shrink-0">
             {/* Search Icon */}
             <button
               onClick={toggleSearch}
@@ -155,7 +155,7 @@ const Header = () => {
                 </button>
                 {isUserMenuOpen && (
                   <div
-                    className="absolute right-0 mt-2 w-56 rounded-xl py-2 border-2 border-dark-grey z-[60]"
+                    className="absolute right-0 mt-2 w-56 rounded-xl py-2 border-2 border-dark-grey z-60"
                     style={{
                       backgroundColor: "#FDFDFF",
                       boxShadow: "0 10px 40px rgba(57, 61, 63, 0.3)",

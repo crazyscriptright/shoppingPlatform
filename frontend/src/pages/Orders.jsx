@@ -189,7 +189,7 @@ const Orders = () => {
                       {order.items?.slice(0, 4).map((item, index) => (
                         <div
                           key={index}
-                          className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-warm-grey/10"
+                          className="shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-warm-grey/10"
                         >
                           <img
                             src={
@@ -201,7 +201,7 @@ const Orders = () => {
                         </div>
                       ))}
                       {order.items?.length > 4 && (
-                        <div className="flex-shrink-0 w-20 h-20 rounded-lg bg-warm-grey/10 flex items-center justify-center text-dark-grey/60 text-sm font-medium">
+                        <div className="shrink-0 w-20 h-20 rounded-lg bg-warm-grey/10 flex items-center justify-center text-dark-grey/60 text-sm font-medium">
                           +{order.items.length - 4}
                         </div>
                       )}

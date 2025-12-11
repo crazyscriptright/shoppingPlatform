@@ -289,7 +289,7 @@ const Shop = () => {
                 <select
                   value={filters.sort}
                   onChange={(e) => handleFilterChange("sort", e.target.value)}
-                  className="px-3 py-2.5 rounded bg-off-white text-dark-grey focus:outline-none focus:ring-2 focus:ring-soft-teal text-sm sm:w-auto min-w-[160px]"
+                  className="px-3 py-2.5 rounded bg-off-white text-dark-grey focus:outline-none focus:ring-2 focus:ring-soft-teal text-sm sm:w-auto min-w-160px"
                 >
                   {sortOptions.map((option) => (
                     <option key={option.value} value={option.value}>

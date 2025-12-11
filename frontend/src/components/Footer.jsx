@@ -146,7 +146,7 @@ const Footer = () => {
                 className="flex-1 px-4 py-2.5 rounded-l-md bg-warm-grey/10 text-dark-grey placeholder-muted-slate focus:outline-none focus:ring-2 focus:ring-soft-teal border border-warm-grey/30 text-sm min-w-0"
               />
               <button
-                className="bg-soft-teal px-4 py-2.5 rounded-r-md hover:bg-opacity-90 transition text-off-white flex-shrink-0"
+                className="bg-soft-teal px-4 py-2.5 rounded-r-md hover:bg-opacity-90 transition text-off-white shrink-0"
                 aria-label="Subscribe"
               >
                 <Mail size={18} />

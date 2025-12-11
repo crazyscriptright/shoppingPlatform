@@ -143,7 +143,7 @@ const Home = () => {
               </div>
 
               <h1
-                className="text-6xl lg:text-7xl xl:text-8xl leading-[1] tracking-tight text-dark-grey pr-4"
+                className="text-6xl lg:text-7xl xl:text-8xl leading-none tracking-tight text-dark-grey pr-4"
                 style={{
                   fontFamily: "'Playfair Display', Georgia, serif",
                   marginBottom: "0.5rem",
