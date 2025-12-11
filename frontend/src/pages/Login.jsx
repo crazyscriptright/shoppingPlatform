@@ -45,33 +45,33 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-[#F5F3EF] flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6">
         {/* Header */}
         <div className="text-center">
           <Link
             to="/"
-            className="text-4xl sm:text-5xl font-normal text-dark-grey inline-block"
+            className="text-4xl sm:text-5xl font-normal text-dark-grey dark:text-off-white inline-block transition-colors"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Flipcard
           </Link>
           <h2
-            className="mt-4 sm:mt-6 text-2xl sm:text-3xl font-normal text-dark-grey"
+            className="mt-4 sm:mt-6 text-2xl sm:text-3xl font-normal text-dark-grey dark:text-off-white transition-colors"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Welcome Back
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-dark-grey/60 font-light">
+          <p className="mt-2 text-sm sm:text-base text-dark-grey/60 dark:text-off-white/60 font-light transition-colors">
             Sign in to your account
           </p>
         </div>
 
         {/* Login Form */}
-        <div className="bg-white rounded-lg shadow-md p-6 sm:p-8">
+        <div className="bg-off-white dark:bg-muted-slate rounded-lg p-6 sm:p-8 transition-colors">
           <form onSubmit={handleSubmit} className="space-y-5">
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+              <div className="bg-muted-slate/10 dark:bg-muted-slate/20 border border-muted-slate/30 text-dark-grey dark:text-off-white px-4 py-3 rounded-lg text-sm transition-colors">
                 {error}
               </div>
             )}
@@ -113,7 +113,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-[42px] text-muted-slate hover:text-dark-grey transition-colors"
+                className="absolute right-3 top-[42px] text-muted-slate dark:text-off-white/50 hover:text-dark-grey dark:hover:text-off-white transition-colors"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
@@ -135,7 +135,7 @@ const Login = () => {
                 type="submit"
                 size="md"
                 disabled={loading}
-                className="mt-6 w-48 border-2 border-soft-teal hover:border-soft-teal/80 text-soft-teal hover:text-dark-grey transition-colors"
+                className="mt-6 w-48 text-soft-teal hover:text-dark-grey transition-colors"
               >
                 {loading ? "Signing in..." : "Sign In"}
               </Button>
@@ -144,7 +144,7 @@ const Login = () => {
 
           {/* Sign Up Link */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-dark-grey/60">
+            <p className="text-sm text-dark-grey/60 dark:text-off-white/60 transition-colors">
               Don't have an account?{" "}
               <Link
                 to="/register"

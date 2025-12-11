@@ -18,8 +18,9 @@ const Button = ({
       "bg-dark-grey text-off-white hover:bg-opacity-90 focus:ring-dark-grey",
     outline:
       "border-2 border-soft-teal text-soft-teal hover:bg-soft-teal hover:text-off-white focus:ring-soft-teal",
-    ghost: "text-dark-grey hover:bg-gray-100 focus:ring-gray-200",
-    danger: "bg-red-500 text-off-white hover:bg-red-600 focus:ring-red-500",
+    ghost: "text-dark-grey hover:bg-warm-grey/10 focus:ring-warm-grey/30",
+    danger:
+      "bg-muted-slate text-off-white hover:bg-dark-grey focus:ring-muted-slate",
   };
 
   const sizes = {

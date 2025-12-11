@@ -93,24 +93,24 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-[#F5F3EF] flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6">
         {/* Header */}
         <div className="text-center">
           <Link
             to="/"
-            className="text-4xl sm:text-5xl font-normal text-dark-grey inline-block"
+            className="text-4xl sm:text-5xl font-normal text-dark-grey dark:text-off-white inline-block transition-colors"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Flipcard
           </Link>
           <h2
-            className="mt-4 sm:mt-6 text-2xl sm:text-3xl font-normal text-dark-grey"
+            className="mt-4 sm:mt-6 text-2xl sm:text-3xl font-normal text-dark-grey dark:text-off-white transition-colors"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             {step === 1 ? "Forgot Password" : "Reset Password"}
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-dark-grey/60 font-light">
+          <p className="mt-2 text-sm sm:text-base text-dark-grey/60 dark:text-off-white/60 font-light transition-colors">
             {step === 1
               ? "Enter your email and date of birth to verify your identity"
               : "Create a new password for your account"}
@@ -118,12 +118,12 @@ const ForgotPassword = () => {
         </div>
 
         {/* Form */}
-        <div className="bg-white rounded-lg shadow-md p-6 sm:p-8">
+        <div className="bg-off-white dark:bg-muted-slate rounded-lg p-6 sm:p-8 transition-colors">
           {step === 1 ? (
             // Step 1: Verify Email and DOB
             <form onSubmit={handleVerify} className="space-y-5">
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                <div className="bg-muted-slate/10 border border-muted-slate/30 text-dark-grey px-4 py-3 rounded-lg text-sm">
                   {error}
                 </div>
               )}
@@ -169,7 +169,7 @@ const ForgotPassword = () => {
                   type="submit"
                   size="md"
                   disabled={loading}
-                  className="mt-6 w-48 border-2 border-soft-teal hover:border-soft-teal/80 text-soft-teal hover:text-dark-grey transition-colors"
+                  className="mt-6 w-48 text-soft-teal hover:text-dark-grey transition-colors"
                 >
                   {loading ? "Verifying..." : "Verify Identity"}
                 </Button>
@@ -179,7 +179,7 @@ const ForgotPassword = () => {
             // Step 2: Reset Password
             <form onSubmit={handleResetPassword} className="space-y-5">
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                <div className="bg-muted-slate/10 border border-muted-slate/30 text-dark-grey px-4 py-3 rounded-lg text-sm">
                   {error}
                 </div>
               )}

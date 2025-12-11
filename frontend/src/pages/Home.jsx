@@ -30,24 +30,24 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F3EF]">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-[#F5F3EF]">
+      <section className="relative">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="hero-grid py-8 lg:py-16">
             {/* Left side - Text */}
             <div className="hero-text-container space-y-6 lg:space-y-8">
               <div className="space-y-1">
-                <div className="text-xs tracking-widest text-dark-grey/60">
+                <div className="text-xs tracking-widest text-dark-grey/60 dark:text-off-white/60 transition-colors">
                   D'Florencis
                 </div>
-                <div className="text-xs tracking-wide text-dark-grey/50">
+                <div className="text-xs tracking-wide text-dark-grey/50 dark:text-off-white/50 transition-colors">
                   Hype AAEs
                 </div>
               </div>
 
               <h1
-                className="text-6xl lg:text-7xl xl:text-8xl leading-[1] tracking-tight text-dark-grey pr-4"
+                className="text-6xl lg:text-7xl xl:text-8xl leading-[1] tracking-tight text-dark-grey dark:text-off-white pr-4 transition-colors"
                 style={{
                   fontFamily: "'Playfair Display', Georgia, serif",
                   marginBottom: "0.5rem",
@@ -60,13 +60,13 @@ const Home = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 mt-6">
                 <Link to="/login" className="group">
-                  <div className="relative overflow-hidden bg-soft-teal text-off-white px-8 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300 hover:bg-dark-grey hover:scale-105 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl">
+                  <div className="relative overflow-hidden bg-soft-teal text-off-white px-8 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300 hover:bg-dark-grey dark:hover:bg-off-white dark:hover:text-dark-grey hover:scale-105 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl">
                     <span>Sign Up</span>
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </div>
                 </Link>
                 <Link to="/shop" className="group">
-                  <div className="relative overflow-hidden bg-transparent border-2 border-dark-grey text-dark-grey px-8 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300 hover:bg-dark-grey hover:text-off-white hover:scale-105 flex items-center justify-center gap-2">
+                  <div className="relative overflow-hidden bg-transparent border border-dark-grey dark:border-off-white text-dark-grey dark:text-off-white px-8 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300 hover:bg-dark-grey hover:text-off-white dark:hover:bg-off-white dark:hover:text-dark-grey hover:scale-105 flex items-center justify-center gap-2">
                     <span>Explore</span>
                     <TrendingUp className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
                   </div>
@@ -90,13 +90,13 @@ const Home = () => {
       </section>
 
       {/* New Arrivals Section with Product Cards */}
-      <section className="bg-white py-24 lg:py-32" style={{ padding: 24 }}>
+      <section className="py-24 lg:py-32 transition-colors">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-6 items-center">
             {/* New Arrival Text */}
             <div className="lg:col-span-1">
               <h2
-                className="text-5xl lg:text-6xl leading-tight text-dark-grey"
+                className="text-5xl lg:text-6xl leading-tight text-dark-grey dark:text-off-white transition-colors"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 New
@@ -108,44 +108,50 @@ const Home = () => {
             {/* Product Cards */}
             <div className="lg:col-span-4 grid grid-cols-2 md:grid-cols-4 gap-4">
               {/* Classic Hat */}
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-lg transition">
-                <div className="aspect-square bg-gray-100 rounded-lg mb-3 flex items-center justify-center overflow-hidden">
+              <div className="bg-off-white border border-warm-grey/30 rounded-lg p-4 text-center hover:shadow-lg transition">
+                <div className="aspect-square bg-warm-grey/10 rounded-lg mb-3 flex items-center justify-center overflow-hidden">
                   <img
                     src="https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=400&auto=format&fit=crop"
                     alt="Classic Hat"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <p className="text-sm text-dark-grey font-light">Classic Hat</p>
+                <p className="text-sm text-dark-grey dark:text-off-white font-light transition-colors">
+                  Classic Hat
+                </p>
               </div>
 
               {/* Mini Wallet */}
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-lg transition">
-                <div className="aspect-square bg-gray-100 rounded-lg mb-3 flex items-center justify-center overflow-hidden">
+              <div className="bg-off-white dark:bg-[#1a1d1e] border border-warm-grey/30 dark:border-muted-slate rounded-lg p-4 text-center hover:shadow-lg transition-colors">
+                <div className="aspect-square bg-warm-grey/10 dark:bg-muted-slate/20 rounded-lg mb-3 flex items-center justify-center overflow-hidden transition-colors">
                   <img
                     src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&auto=format&fit=crop"
                     alt="Mini Wallet"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <p className="text-sm text-dark-grey font-light">Mini Wallet</p>
+                <p className="text-sm text-dark-grey dark:text-off-white font-light transition-colors">
+                  Mini Wallet
+                </p>
               </div>
 
               {/* Belt Bag */}
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-lg transition">
-                <div className="aspect-square bg-gray-100 rounded-lg mb-3 flex items-center justify-center overflow-hidden">
+              <div className="bg-off-white dark:bg-[#1a1d1e] border border-warm-grey/30 dark:border-muted-slate rounded-lg p-4 text-center hover:shadow-lg transition-colors">
+                <div className="aspect-square bg-warm-grey/10 dark:bg-muted-slate/20 rounded-lg mb-3 flex items-center justify-center overflow-hidden transition-colors">
                   <img
                     src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&auto=format&fit=crop"
                     alt="Belt Bag"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <p className="text-sm text-dark-grey font-light">Belt Bag</p>
+                <p className="text-sm text-dark-grey dark:text-off-white font-light transition-colors">
+                  Belt Bag
+                </p>
               </div>
 
               {/* Shoes with Arrow */}
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-lg transition relative">
-                <div className="aspect-square bg-gray-100 rounded-lg mb-3 flex items-center justify-center overflow-hidden">
+              <div className="bg-off-white dark:bg-[#1a1d1e] border border-warm-grey/30 dark:border-muted-slate rounded-lg p-4 text-center hover:shadow-lg transition-colors relative">
+                <div className="aspect-square bg-warm-grey/10 dark:bg-muted-slate/20 rounded-lg mb-3 flex items-center justify-center overflow-hidden transition-colors">
                   <img
                     src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&auto=format&fit=crop"
                     alt="Shoes"
@@ -153,8 +159,13 @@ const Home = () => {
                   />
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                  <p className="text-sm text-dark-grey font-light">Shoes</p>
-                  <ArrowRight size={16} className="text-dark-grey" />
+                  <p className="text-sm text-dark-grey dark:text-off-white font-light transition-colors">
+                    Shoes
+                  </p>
+                  <ArrowRight
+                    size={16}
+                    className="text-dark-grey dark:text-off-white transition-colors"
+                  />
                 </div>
               </div>
             </div>
@@ -163,17 +174,17 @@ const Home = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="py-12 lg:py-16 bg-[#F5F3EF]">
+      <section className="py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 lg:mb-12 gap-4">
             <div>
               <h2
-                className="text-3xl md:text-4xl lg:text-5xl font-normal text-dark-grey leading-tight"
+                className="text-3xl md:text-4xl lg:text-5xl font-normal text-dark-grey dark:text-off-white leading-tight transition-colors"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 Featured Products
               </h2>
-              <p className="text-dark-grey/60 mt-1 text-sm lg:text-base font-light">
+              <p className="text-dark-grey/60 dark:text-off-white/60 mt-1 text-sm lg:text-base font-light transition-colors">
                 Handpicked favorites just for you
               </p>
             </div>
@@ -222,7 +233,10 @@ const Home = () => {
       </section> */}
 
       {/* Features Section */}
-      <section className="py-12 lg:py-16 bg-off-white" style={{ padding: 24 }}>
+      <section
+        className="py-12 lg:py-16 bg-off-white dark:bg-muted-slate transition-colors"
+        style={{ padding: 24 }}
+      >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 text-center">
             <div className="p-4 lg:p-6">
@@ -243,13 +257,13 @@ const Home = () => {
                 </svg>
               </div>
               <h3
-                className="text-lg lg:text-xl font-normal text-dark-grey mb-1 lg:mb-2"
+                className="text-lg lg:text-xl font-normal text-dark-grey dark:text-off-white mb-1 lg:mb-2 transition-colors"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 Free Shipping
               </h3>
-              <p className="text-sm lg:text-base text-dark-grey/60 font-light">
-                On orders over $50
+              <p className="text-sm lg:text-base text-dark-grey/60 dark:text-off-white/60 font-light transition-colors">
+                On orders over ₹50
               </p>
             </div>
             <div className="p-4 lg:p-6">
@@ -270,12 +284,12 @@ const Home = () => {
                 </svg>
               </div>
               <h3
-                className="text-lg lg:text-xl font-normal text-dark-grey mb-1 lg:mb-2"
+                className="text-lg lg:text-xl font-normal text-dark-grey dark:text-off-white mb-1 lg:mb-2 transition-colors"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 Easy Returns
               </h3>
-              <p className="text-sm lg:text-base text-dark-grey/60 font-light">
+              <p className="text-sm lg:text-base text-dark-grey/60 dark:text-off-white/60 font-light transition-colors">
                 30-day return policy
               </p>
             </div>
@@ -297,12 +311,12 @@ const Home = () => {
                 </svg>
               </div>
               <h3
-                className="text-lg lg:text-xl font-normal text-dark-grey mb-1 lg:mb-2"
+                className="text-lg lg:text-xl font-normal text-dark-grey dark:text-off-white mb-1 lg:mb-2 transition-colors"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 Secure Payment
               </h3>
-              <p className="text-sm lg:text-base text-dark-grey/60 font-light">
+              <p className="text-sm lg:text-base text-dark-grey/60 dark:text-off-white/60 font-light transition-colors">
                 100% secure transactions
               </p>
             </div>

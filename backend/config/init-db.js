@@ -47,17 +47,37 @@ const initDb = async () => {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS orders (
         id SERIAL PRIMARY KEY,
-        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-        order_number VARCHAR(50) UNIQUE,
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        order_number VARCHAR(50) UNIQUE NOT NULL,
         total_amount DECIMAL(10, 2) NOT NULL,
-        status VARCHAR(50) DEFAULT 'pending',
-        shipping_address TEXT,
+        status VARCHAR(50) NOT NULL DEFAULT 'pending',
+        shipping_address TEXT NOT NULL,
         payment_method VARCHAR(50),
+        payment_id VARCHAR(255),
+        payment_status VARCHAR(50) NOT NULL DEFAULT 'pending',
+        delivery_date TIMESTAMP,
+        delivery_phone VARCHAR(20),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
     console.log("Orders table created");
+
+    // Add columns if they don't exist (for existing databases)
+    await pool.query(`
+      DO $$ 
+      BEGIN
+        IF NOT EXISTS (SELECT 1 FROM information_schema.columns 
+                      WHERE table_name='orders' AND column_name='delivery_date') THEN
+          ALTER TABLE orders ADD COLUMN delivery_date TIMESTAMP;
+        END IF;
+        IF NOT EXISTS (SELECT 1 FROM information_schema.columns 
+                      WHERE table_name='orders' AND column_name='delivery_phone') THEN
+          ALTER TABLE orders ADD COLUMN delivery_phone VARCHAR(20);
+        END IF;
+      END $$;
+    `);
+    console.log("Orders table columns verified");
 
     // Create Order Items table
     await pool.query(`
@@ -71,6 +91,23 @@ const initDb = async () => {
       )
     `);
     console.log("Order Items table created");
+
+    // Drop existing cart_items table if it exists (to recreate with proper constraints)
+    await pool.query(`DROP TABLE IF EXISTS cart_items CASCADE`);
+
+    // Create Cart table with proper constraints
+    await pool.query(`
+      CREATE TABLE cart_items (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+        quantity INTEGER NOT NULL DEFAULT 1 CHECK (quantity > 0),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT unique_user_product UNIQUE(user_id, product_id)
+      )
+    `);
+    console.log("Cart Items table created with UNIQUE constraint");
 
     // Create admin user
     const hashedPassword = await bcrypt.hash("admin123", 10);

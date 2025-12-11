@@ -1,21 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, Heart, Eye } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 const ProductCard = ({ product }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { addToCart } = useCart();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
-  const handleAddToCart = (e) => {
+  const handleAddToCart = async (e) => {
     e.preventDefault();
-    addToCart(product);
+
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
+    await addToCart(product);
   };
 
   return (
     <Link to={`/product/${product.id}`}>
       <div
-        className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 group"
+        className="bg-off-white rounded-lg overflow-hidden border border-warm-grey/30 hover:shadow-xl transition-all duration-300 group"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -92,11 +101,11 @@ const ProductCard = ({ product }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-dark-grey font-bold text-lg">
-                ${parseFloat(product.price || 0).toFixed(2)}
+                ₹{parseFloat(product.price || 0).toFixed(2)}
               </span>
               {product.originalPrice && (
                 <span className="text-dark-grey/50 text-sm line-through">
-                  ${parseFloat(product.originalPrice).toFixed(2)}
+                  ₹{parseFloat(product.originalPrice).toFixed(2)}
                 </span>
               )}
             </div>

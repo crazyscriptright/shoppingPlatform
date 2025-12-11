@@ -177,12 +177,16 @@ const Shop = () => {
   }, [handleExternalReset]);
 
   return (
-    <div className="min-h-screen bg-off-white py-8">
+    <div className="min-h-screen py-8">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-dark-grey mb-2">Shop</h1>
-          <p className="text-muted-slate">Discover our complete collection</p>
+          <h1 className="text-4xl font-bold text-dark-grey dark:text-off-white mb-2 transition-colors">
+            Shop
+          </h1>
+          <p className="text-muted-slate dark:text-off-white/70 transition-colors">
+            Discover our complete collection
+          </p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
@@ -190,9 +194,9 @@ const Shop = () => {
           <div
             className={`lg:w-64 ${showFilters ? "block" : "hidden lg:block"}`}
           >
-            <div className="bg-warm-grey rounded-lg p-6 sticky top-24">
+            <div className="bg-warm-grey dark:bg-muted-slate rounded-lg p-6 sticky top-24 transition-colors">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold text-dark-grey flex items-center gap-2">
+                <h3 className="text-xl font-semibold text-dark-grey dark:text-off-white flex items-center gap-2 transition-colors">
                   <Filter size={20} />
                   Filters
                 </h3>
@@ -206,7 +210,9 @@ const Shop = () => {
 
               {/* Category Filter */}
               <div className="mb-6">
-                <h4 className="font-semibold text-dark-grey mb-3">Category</h4>
+                <h4 className="font-semibold text-dark-grey dark:text-off-white mb-3 transition-colors">
+                  Category
+                </h4>
                 <div className="space-y-2">
                   {categories.map((category) => (
                     <label
@@ -228,7 +234,9 @@ const Shop = () => {
                         }
                         className="mr-2 accent-soft-teal"
                       />
-                      <span className="text-dark-grey">{category}</span>
+                      <span className="text-dark-grey dark:text-off-white transition-colors">
+                        {category}
+                      </span>
                     </label>
                   ))}
                 </div>
@@ -236,7 +244,7 @@ const Shop = () => {
 
               {/* Price Range */}
               <div className="mb-6">
-                <h4 className="font-semibold text-dark-grey mb-3">
+                <h4 className="font-semibold text-dark-grey dark:text-off-white mb-3 transition-colors">
                   Price Range
                 </h4>
                 <div className="space-y-3">
@@ -247,7 +255,7 @@ const Shop = () => {
                     onChange={(e) =>
                       handleFilterChange("minPrice", e.target.value)
                     }
-                    className="w-full px-3 py-2 rounded border-2 border-muted-slate focus:border-soft-teal focus:outline-none"
+                    className="w-full px-3 py-2 rounded border-2 border-muted-slate dark:border-muted-slate/50 focus:border-soft-teal focus:outline-none bg-off-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white transition-colors"
                   />
                   <input
                     type="number"
@@ -256,7 +264,7 @@ const Shop = () => {
                     onChange={(e) =>
                       handleFilterChange("maxPrice", e.target.value)
                     }
-                    className="w-full px-3 py-2 rounded border-2 border-muted-slate focus:border-soft-teal focus:outline-none"
+                    className="w-full px-3 py-2 rounded border-2 border-muted-slate dark:border-muted-slate/50 focus:border-soft-teal focus:outline-none bg-off-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white transition-colors"
                   />
                 </div>
               </div>
@@ -270,16 +278,16 @@ const Shop = () => {
           {/* Products Grid */}
           <div className="flex-1">
             {/* Toolbar */}
-            <div className="bg-warm-grey rounded-lg p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="bg-warm-grey dark:bg-muted-slate rounded-lg p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors">
               <div className="flex items-center gap-4 w-full sm:w-auto">
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className="lg:hidden flex items-center gap-2 text-dark-grey hover:text-soft-teal"
+                  className="lg:hidden flex items-center gap-2 text-dark-grey dark:text-off-white hover:text-soft-teal transition-colors"
                 >
                   <Filter size={20} />
                   Filters
                 </button>
-                <span className="text-dark-grey">
+                <span className="text-dark-grey dark:text-off-white transition-colors">
                   {products.length} Products
                 </span>
               </div>
@@ -289,7 +297,7 @@ const Shop = () => {
                 <select
                   value={filters.sort}
                   onChange={(e) => handleFilterChange("sort", e.target.value)}
-                  className="px-3 py-2 rounded border-2 border-muted-slate focus:border-soft-teal focus:outline-none text-sm sm:w-auto min-w-[160px]"
+                  className="px-3 py-2.5 rounded bg-off-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white focus:outline-none focus:ring-2 focus:ring-soft-teal text-sm sm:w-auto min-w-[160px] border border-transparent dark:border-muted-slate/50 transition-colors"
                 >
                   {sortOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -302,20 +310,20 @@ const Shop = () => {
                 <div className="flex gap-2 sm:ml-8">
                   <button
                     onClick={() => setViewMode("grid")}
-                    className={`p-2 rounded ${
+                    className={`p-2 rounded transition-colors ${
                       viewMode === "grid"
                         ? "bg-soft-teal text-off-white"
-                        : "bg-off-white text-dark-grey"
+                        : "bg-off-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white"
                     }`}
                   >
                     <Grid size={20} />
                   </button>
                   <button
                     onClick={() => setViewMode("list")}
-                    className={`p-2 rounded ${
+                    className={`p-2 rounded transition-colors ${
                       viewMode === "list"
                         ? "bg-soft-teal text-off-white"
-                        : "bg-off-white text-dark-grey"
+                        : "bg-off-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white"
                     }`}
                   >
                     <List size={20} />
@@ -331,7 +339,9 @@ const Shop = () => {
               </div>
             ) : products.length === 0 ? (
               <div className="text-center py-20">
-                <p className="text-muted-slate text-lg">No products found</p>
+                <p className="text-muted-slate dark:text-off-white/70 text-lg transition-colors">
+                  No products found
+                </p>
                 <Button onClick={clearFilters} className="mt-4">
                   Clear Filters
                 </Button>
@@ -368,7 +378,7 @@ const Shop = () => {
                 {/* End of Products Message */}
                 {!hasMore && products.length > 0 && (
                   <div className="text-center py-8">
-                    <p className="text-muted-slate text-sm">
+                    <p className="text-muted-slate dark:text-off-white/70 text-sm transition-colors">
                       You've reached the end of the products
                     </p>
                   </div>

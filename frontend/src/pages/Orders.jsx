@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Package, ChevronRight, Calendar, DollarSign } from "lucide-react";
 import api from "../services/api";
+import { getDeliveryInfo } from "../utils/orderUtils";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -26,17 +27,17 @@ const Orders = () => {
   const getStatusColor = (status) => {
     switch (status?.toLowerCase()) {
       case "pending":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200";
+        return "bg-warm-grey/30 text-dark-grey border-warm-grey/40";
       case "processing":
-        return "bg-blue-100 text-blue-800 border-blue-200";
+        return "bg-muted-slate/20 text-muted-slate border-muted-slate/30";
       case "shipped":
-        return "bg-purple-100 text-purple-800 border-purple-200";
+        return "bg-soft-teal/30 text-soft-teal border-soft-teal/40";
       case "delivered":
-        return "bg-green-100 text-green-800 border-green-200";
+        return "bg-soft-teal/20 text-soft-teal border-soft-teal/30";
       case "cancelled":
-        return "bg-red-100 text-red-800 border-red-200";
+        return "bg-muted-slate/30 text-dark-grey border-muted-slate/40";
       default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
+        return "bg-warm-grey/20 text-dark-grey border-warm-grey/30";
     }
   };
 
@@ -47,28 +48,32 @@ const Orders = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F5F3EF] flex items-center justify-center">
-        <div className="text-dark-grey">Loading orders...</div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-dark-grey dark:text-off-white transition-colors">
+          Loading orders...
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F3EF]">
+    <div className="min-h-screen">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="mb-8">
           <h1
-            className="text-3xl md:text-4xl font-normal text-dark-grey mb-2"
+            className="text-3xl md:text-4xl font-normal text-dark-grey dark:text-off-white mb-2 transition-colors"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             My Orders
           </h1>
-          <p className="text-dark-grey/60">Track and manage your orders</p>
+          <p className="text-dark-grey/60 dark:text-off-white/60 transition-colors">
+            Track and manage your orders
+          </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
+        <div className="bg-warm-grey/10 dark:bg-muted-slate/20 rounded-lg p-5 mb-6 transition-colors">
           <div className="flex flex-wrap gap-2">
             {[
               "all",
@@ -81,10 +86,10 @@ const Orders = () => {
               <button
                 key={status}
                 onClick={() => setFilter(status)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   filter === status
                     ? "bg-soft-teal text-off-white"
-                    : "bg-gray-100 text-dark-grey hover:bg-gray-200"
+                    : "bg-warm-grey/10 dark:bg-muted-slate/30 text-dark-grey dark:text-off-white hover:bg-warm-grey/20 dark:hover:bg-muted-slate/40"
                 }`}
               >
                 {status.charAt(0).toUpperCase() + status.slice(1)}
@@ -95,12 +100,15 @@ const Orders = () => {
 
         {/* Orders List */}
         {filteredOrders.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-            <Package className="mx-auto mb-4 text-gray-300" size={64} />
-            <h3 className="text-xl font-medium text-dark-grey mb-2">
+          <div className="bg-off-white dark:bg-muted-slate rounded-lg p-12 text-center transition-colors">
+            <Package
+              className="mx-auto mb-4 text-warm-grey/40 dark:text-off-white/40 transition-colors"
+              size={64}
+            />
+            <h3 className="text-xl font-medium text-dark-grey dark:text-off-white mb-2 transition-colors">
               No orders found
             </h3>
-            <p className="text-dark-grey/60 mb-6">
+            <p className="text-dark-grey/60 dark:text-off-white/60 mb-6 transition-colors">
               {filter === "all"
                 ? "You haven't placed any orders yet."
                 : `You don't have any ${filter} orders.`}
@@ -114,109 +122,153 @@ const Orders = () => {
           </div>
         ) : (
           <div className="space-y-4">
-            {filteredOrders.map((order) => (
-              <div
-                key={order.id}
-                className="bg-white rounded-lg shadow-sm hover:shadow-md transition overflow-hidden"
-              >
-                {/* Order Header */}
-                <div className="p-6 border-b border-gray-100">
-                  <div className="flex flex-wrap items-center justify-between gap-4">
-                    <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-medium text-dark-grey">
-                          Order #{order.order_number || order.id}
-                        </h3>
-                        <span
-                          className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(
-                            order.status
-                          )}`}
-                        >
-                          {order.status}
-                        </span>
+            {filteredOrders.map((order) => {
+              const deliveryInfo = getDeliveryInfo(order);
+              const displayStatus = deliveryInfo.isDelivered
+                ? "delivered"
+                : order.status;
+
+              return (
+                <div
+                  key={order.id}
+                  className="bg-off-white dark:bg-muted-slate rounded-lg transition-colors overflow-hidden"
+                >
+                  {/* Order Header */}
+                  <div className="p-6 border-b border-warm-grey/20 dark:border-muted-slate/30 transition-colors">
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                      <div>
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="text-lg font-medium text-dark-grey dark:text-off-white transition-colors">
+                            Order #{order.order_number || order.id}
+                          </h3>
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(
+                              displayStatus
+                            )}`}
+                          >
+                            {displayStatus}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-4 text-sm text-dark-grey/60 dark:text-off-white/60 transition-colors">
+                          <div className="flex items-center gap-1">
+                            <Calendar size={14} />
+                            <span>
+                              {new Date(order.created_at).toLocaleDateString(
+                                "en-US",
+                                {
+                                  year: "numeric",
+                                  month: "short",
+                                  day: "numeric",
+                                }
+                              )}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Package size={14} />
+                            <span>
+                              {order.items?.length || 0} item
+                              {order.items?.length !== 1 ? "s" : ""}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-4 text-sm text-dark-grey/60">
-                        <div className="flex items-center gap-1">
-                          <Calendar size={14} />
-                          <span>
-                            {new Date(order.created_at).toLocaleDateString(
-                              "en-US",
-                              {
+                      <div className="text-right">
+                        <div className="flex items-center gap-1 text-dark-grey dark:text-off-white font-medium mb-1 transition-colors">
+                          <DollarSign size={16} />
+                          <span className="text-xl">
+                            {parseFloat(order.total_amount || 0).toFixed(2)}
+                          </span>
+                        </div>
+                        <Link
+                          to={`/order/${order.id}`}
+                          className="inline-flex items-center gap-1 text-sm text-soft-teal hover:text-dark-grey transition"
+                        >
+                          View Details
+                          <ChevronRight size={14} />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Order Items Preview */}
+                  <div className="p-6">
+                    <div className="flex gap-4 overflow-x-auto">
+                      {order.items?.slice(0, 4).map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-warm-grey/10 dark:bg-[#1a1d1e]/50 transition-colors"
+                        >
+                          <img
+                            src={
+                              item.product_image || "/placeholder-product.jpg"
+                            }
+                            alt={item.product_name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                      {order.items?.length > 4 && (
+                        <div className="flex-shrink-0 w-20 h-20 rounded-lg bg-warm-grey/10 dark:bg-[#1a1d1e]/50 flex items-center justify-center text-dark-grey/60 dark:text-off-white/60 text-sm font-medium transition-colors">
+                          +{order.items.length - 4}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Order Actions */}
+                  <div className="px-6 py-4 bg-warm-grey/5 dark:bg-[#1a1d1e]/30 transition-colors">
+                    {deliveryInfo.isDelivered && (
+                      <div className="mb-3 p-3 bg-soft-teal/10 dark:bg-soft-teal/20 border border-soft-teal/30 rounded-lg transition-colors">
+                        <div className="flex items-center justify-between text-sm flex-wrap gap-2">
+                          <div>
+                            <span className="font-medium text-dark-grey dark:text-off-white transition-colors">
+                              Delivered on:{" "}
+                            </span>
+                            <span className="text-muted-slate">
+                              {new Date(
+                                deliveryInfo.delivery_date
+                              ).toLocaleDateString("en-US", {
                                 year: "numeric",
                                 month: "short",
                                 day: "numeric",
-                              }
-                            )}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Package size={14} />
-                          <span>
-                            {order.items?.length || 0} item
-                            {order.items?.length !== 1 ? "s" : ""}
-                          </span>
+                              })}
+                            </span>
+                          </div>
+                          {deliveryInfo.delivery_phone && (
+                            <div>
+                              <span className="font-medium text-dark-grey">
+                                Delivery Contact:{" "}
+                              </span>
+                              <span className="text-muted-slate">
+                                {deliveryInfo.delivery_phone}
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="flex items-center gap-1 text-dark-grey font-medium mb-1">
-                        <DollarSign size={16} />
-                        <span className="text-xl">
-                          {parseFloat(order.total_amount || 0).toFixed(2)}
-                        </span>
-                      </div>
+                    )}
+                    <div className="flex flex-wrap gap-2">
+                      {displayStatus?.toLowerCase() === "delivered" && (
+                        <button className="px-4 py-2 text-sm text-dark-grey dark:text-off-white border border-warm-grey/50 dark:border-muted-slate rounded hover:bg-warm-grey/10 dark:hover:bg-muted-slate/20 transition-colors">
+                          Leave Review
+                        </button>
+                      )}
+                      {displayStatus?.toLowerCase() === "pending" && (
+                        <button className="px-4 py-2 text-sm text-muted-slate dark:text-off-white/70 border border-muted-slate/40 rounded hover:bg-muted-slate/10 dark:hover:bg-muted-slate/20 transition-colors">
+                          Cancel Order
+                        </button>
+                      )}
                       <Link
-                        to={`/order/${order.id}`}
-                        className="inline-flex items-center gap-1 text-sm text-soft-teal hover:text-dark-grey transition"
+                        to={`/track-order/${order.id}`}
+                        className="px-4 py-2 text-sm text-dark-grey dark:text-off-white border border-warm-grey/50 dark:border-muted-slate rounded hover:bg-warm-grey/10 dark:hover:bg-muted-slate/20 transition-colors"
                       >
-                        View Details
-                        <ChevronRight size={14} />
+                        Track Order
                       </Link>
                     </div>
                   </div>
                 </div>
-
-                {/* Order Items Preview */}
-                <div className="p-6">
-                  <div className="flex gap-4 overflow-x-auto">
-                    {order.items?.slice(0, 4).map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-gray-100"
-                      >
-                        <img
-                          src={item.product_image || "/placeholder-product.jpg"}
-                          alt={item.product_name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ))}
-                    {order.items?.length > 4 && (
-                      <div className="flex-shrink-0 w-20 h-20 rounded-lg bg-gray-100 flex items-center justify-center text-dark-grey/60 text-sm font-medium">
-                        +{order.items.length - 4}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Order Actions */}
-                <div className="px-6 py-4 bg-gray-50 flex flex-wrap gap-2">
-                  {order.status?.toLowerCase() === "delivered" && (
-                    <button className="px-4 py-2 text-sm text-dark-grey border border-gray-300 rounded hover:bg-gray-100 transition">
-                      Leave Review
-                    </button>
-                  )}
-                  {order.status?.toLowerCase() === "pending" && (
-                    <button className="px-4 py-2 text-sm text-red-600 border border-red-300 rounded hover:bg-red-50 transition">
-                      Cancel Order
-                    </button>
-                  )}
-                  <button className="px-4 py-2 text-sm text-dark-grey border border-gray-300 rounded hover:bg-gray-100 transition">
-                    Track Order
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

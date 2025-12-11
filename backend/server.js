@@ -6,6 +6,7 @@ import productRoutes from "./routes/products.js";
 import adminRoutes from "./routes/admin.js";
 import collectionsRoutes from "./routes/collections.js";
 import ordersRoutes from "./routes/orders.js";
+import cartRoutes from "./routes/cart.js";
 
 // Load environment configuration
 loadEnvironment();
@@ -34,6 +35,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/collections", collectionsRoutes);
 app.use("/api/orders", ordersRoutes);
+app.use("/api/cart", cartRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

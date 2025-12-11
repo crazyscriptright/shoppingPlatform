@@ -8,6 +8,7 @@ import "@fontsource/playfair-display/800.css";
 import "@fontsource/playfair-display/900.css";
 import "./index.css";
 import App from "./App.jsx";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 // Register service worker for image caching
 if ("serviceWorker" in navigator) {
@@ -25,6 +26,8 @@ if ("serviceWorker" in navigator) {
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </StrictMode>
 );

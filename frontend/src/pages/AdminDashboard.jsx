@@ -14,6 +14,7 @@ import Button from "../components/Button";
 import Modal from "../components/Modal";
 import Input from "../components/Input";
 import api from "../services/api";
+import { getDeliveryInfo } from "../utils/orderUtils";
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -98,6 +99,25 @@ const AdminDashboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Frontend validation
+    if (!formData.name.trim()) {
+      alert("Product name is required");
+      return;
+    }
+    if (parseFloat(formData.price) <= 0) {
+      alert("Price must be greater than 0");
+      return;
+    }
+    if (!formData.category.trim()) {
+      alert("Category is required");
+      return;
+    }
+    if (parseInt(formData.stock) < 0) {
+      alert("Stock cannot be negative");
+      return;
+    }
+
     try {
       if (editingProduct) {
         await api.put(`/products/${editingProduct.id}`, formData);
@@ -108,7 +128,7 @@ const AdminDashboard = () => {
       handleCloseModal();
     } catch (error) {
       console.error("Error saving product:", error);
-      alert("Failed to save product");
+      alert(error.response?.data?.message || "Failed to save product");
     }
   };
 
@@ -133,15 +153,17 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-off-white py-8">
+    <div className="min-h-screen py-8">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-dark-grey mb-2">
+            <h1 className="text-4xl font-bold text-dark-grey dark:text-off-white mb-2 transition-colors">
               Admin Dashboard
             </h1>
-            <p className="text-muted-slate">Manage your store and products</p>
+            <p className="text-muted-slate dark:text-off-white/70 transition-colors">
+              Manage your store and products
+            </p>
           </div>
           <Button
             onClick={() => handleOpenModal()}
@@ -187,7 +209,7 @@ const AdminDashboard = () => {
               <TrendingUp size={24} className="text-warm-grey" />
             </div>
             <h3 className="text-3xl font-bold mb-1">
-              ${stats.totalRevenue?.toFixed(2)}
+              ₹{stats.totalRevenue?.toFixed(2)}
             </h3>
             <p className="text-warm-grey">Total Revenue</p>
           </div>
@@ -206,7 +228,9 @@ const AdminDashboard = () => {
             <h3 className="text-xl font-semibold text-dark-grey mb-2">
               Manage Products
             </h3>
-            <p className="text-muted-slate">Add, edit, or remove products</p>
+            <p className="text-muted-slate dark:text-off-white/70 transition-colors">
+              Add, edit, or remove products
+            </p>
           </Link>
 
           <Link
@@ -239,14 +263,14 @@ const AdminDashboard = () => {
         </div>
 
         {/* Recent Products */}
-        <div className="bg-warm-grey rounded-lg p-6">
-          <h2 className="text-2xl font-bold text-dark-grey mb-6">
+        <div className="bg-warm-grey dark:bg-muted-slate rounded-lg p-6 transition-colors">
+          <h2 className="text-2xl font-bold text-dark-grey dark:text-off-white mb-6 transition-colors">
             Recent Products
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-muted-slate">
+                <tr className="border-b border-muted-slate dark:border-muted-slate/50 transition-colors">
                   <th className="text-left py-3 px-4 text-dark-grey font-semibold">
                     Image
                   </th>
@@ -271,7 +295,7 @@ const AdminDashboard = () => {
                 {products.slice(0, 10).map((product) => (
                   <tr
                     key={product.id}
-                    className="border-b border-warm-grey hover:bg-off-white transition"
+                    className="border-b border-warm-grey dark:border-muted-slate/50 hover:bg-off-white dark:hover:bg-[#1a1d1e]/50 transition-colors"
                   >
                     <td className="py-3 px-4">
                       <img
@@ -280,21 +304,23 @@ const AdminDashboard = () => {
                         className="w-12 h-12 object-cover rounded"
                       />
                     </td>
-                    <td className="py-3 px-4 text-dark-grey">{product.name}</td>
-                    <td className="py-3 px-4 text-muted-slate">
+                    <td className="py-3 px-4 text-dark-grey dark:text-off-white transition-colors">
+                      {product.name}
+                    </td>
+                    <td className="py-3 px-4 text-muted-slate dark:text-off-white/70 transition-colors">
                       {product.category}
                     </td>
-                    <td className="py-3 px-4 text-dark-grey font-semibold">
-                      ${parseFloat(product.price || 0).toFixed(2)}
+                    <td className="py-3 px-4 text-dark-grey dark:text-off-white font-semibold transition-colors">
+                      ₹{parseFloat(product.price || 0).toFixed(2)}
                     </td>
                     <td className="py-3 px-4">
                       <span
                         className={`px-2 py-1 rounded text-sm ${
                           product.stock > 10
-                            ? "bg-green-100 text-green-700"
+                            ? "bg-soft-teal/20 text-soft-teal"
                             : product.stock > 0
-                            ? "bg-yellow-100 text-yellow-700"
-                            : "bg-red-100 text-red-700"
+                            ? "bg-warm-grey/30 text-dark-grey"
+                            : "bg-muted-slate/30 text-muted-slate"
                         }`}
                       >
                         {product.stock}
@@ -330,49 +356,102 @@ const AdminDashboard = () => {
           title={editingProduct ? "Edit Product" : "Add New Product"}
           size="lg"
         >
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Image Preview */}
+            {formData.image && (
+              <div className="flex justify-center">
+                <div className="relative">
+                  <img
+                    src={formData.image || "/placeholder-product.jpg"}
+                    alt="Product preview"
+                    className="w-32 h-32 object-cover rounded-lg"
+                    onError={(e) => {
+                      e.target.src = "/placeholder-product.jpg";
+                    }}
+                  />
+                  <div className="absolute -top-2 -right-2 bg-soft-teal text-off-white text-xs px-2 py-1 rounded-full">
+                    Preview
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input
-                label="Product Name"
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-              <Input
-                label="Price"
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                step="0.01"
-                required
-              />
-              <Input
-                label="Category"
-                type="text"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                required
-              />
-              <Input
-                label="Stock"
-                type="number"
-                name="stock"
-                value={formData.stock}
-                onChange={handleChange}
-                required
-              />
-              <Input
-                label="Image URL"
-                type="text"
-                name="image"
-                value={formData.image}
-                onChange={handleChange}
-                className="md:col-span-2"
-              />
+              <div className="md:col-span-2">
+                <Input
+                  label="Product Name *"
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Enter product name"
+                  required
+                  minLength={3}
+                  maxLength={100}
+                />
+                <p className="text-xs text-muted-slate mt-1">
+                  {formData.name.length}/100 characters
+                </p>
+              </div>
+
+              <div>
+                <Input
+                  label="Price (₹) *"
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  placeholder="0.00"
+                  step="0.01"
+                  min="0.01"
+                  required
+                />
+              </div>
+
+              <div>
+                <Input
+                  label="Stock Quantity *"
+                  type="number"
+                  name="stock"
+                  value={formData.stock}
+                  onChange={handleChange}
+                  placeholder="0"
+                  min="0"
+                  required
+                />
+              </div>
+
+              <div className="md:col-span-2">
+                <Input
+                  label="Category *"
+                  type="text"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  placeholder="e.g., Electronics, Clothing, Books"
+                  required
+                  maxLength={50}
+                />
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-dark-grey font-medium mb-2">
+                  Image URL
+                </label>
+                <input
+                  type="url"
+                  name="image"
+                  value={formData.image}
+                  onChange={handleChange}
+                  placeholder="https://example.com/image.jpg (Leave empty for placeholder)"
+                  className="w-full px-4 py-2.5 rounded-lg bg-off-white text-dark-grey placeholder-muted-slate focus:outline-none focus:ring-2 focus:ring-soft-teal transition"
+                />
+                <p className="text-xs text-muted-slate mt-1">
+                  Paste a direct image URL or leave empty to use default
+                  placeholder
+                </p>
+              </div>
+
               <div className="md:col-span-2">
                 <label className="block text-dark-grey font-medium mb-2">
                   Description
@@ -382,11 +461,17 @@ const AdminDashboard = () => {
                   value={formData.description}
                   onChange={handleChange}
                   rows="4"
-                  className="w-full px-4 py-2.5 border-2 border-warm-grey rounded-lg bg-off-white text-dark-grey placeholder-muted-slate focus:outline-none focus:border-soft-teal transition"
+                  placeholder="Enter product description (optional)"
+                  maxLength={500}
+                  className="w-full px-4 py-2.5 rounded-lg bg-off-white text-dark-grey placeholder-muted-slate focus:outline-none focus:ring-2 focus:ring-soft-teal transition resize-none"
                 />
+                <p className="text-xs text-muted-slate mt-1">
+                  {formData.description.length}/500 characters
+                </p>
               </div>
             </div>
-            <div className="flex gap-4 mt-6">
+
+            <div className="flex gap-4 pt-4 border-t border-warm-grey">
               <Button type="submit" fullWidth>
                 {editingProduct ? "Update Product" : "Add Product"}
               </Button>

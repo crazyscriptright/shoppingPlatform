@@ -11,8 +11,8 @@ router.get("/stats", authenticateToken, isAdmin, async (req, res) => {
     const ordersCount = await pool.query("SELECT COUNT(*) FROM orders");
     const usersCount = await pool.query("SELECT COUNT(*) FROM users");
     const revenue = await pool.query(
-      "SELECT SUM(total) FROM orders WHERE status = $1",
-      ["completed"]
+      "SELECT SUM(total_amount) FROM orders WHERE payment_status = $1",
+      ["paid"]
     );
 
     res.json({

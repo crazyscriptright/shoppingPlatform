@@ -1,12 +1,32 @@
 @import "tailwindcss";
 
+html {
+  transition: background-color 0.3s ease;
+}
+
+html:not(.dark) {
+  background-color: #fdfdff;
+}
+
+html.dark {
+  background-color: #1a1d1e;
+}
+
 body {
   margin: 0;
   font-family: "Freight Display Pro", "Playfair Display", Georgia, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fdfdff;
+  transition: color 0.3s ease;
+  background-color: transparent;
+}
+
+html:not(.dark) body {
   color: #393d3f;
+}
+
+html.dark body {
+  color: #fdfdff;
 }
 
 code {
@@ -141,5 +161,31 @@ section:not(:first-of-type) {
   .hero-text {
     padding-left: 2rem;
     padding-right: 3rem;
+  }
+}
+
+/* Toast notification animation */
+@keyframes slide-up {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Dropdown slide animation without opacity change */
+@keyframes slideDown {
+  from {
+    transform: translateY(-8px);
+  }
+  to {
+    transform: translateY(0);
   }
 }
