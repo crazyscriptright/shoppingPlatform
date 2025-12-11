@@ -93,24 +93,24 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-[calc(100vh-64px)] bg-[#F5F3EF] flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6">
         {/* Header */}
         <div className="text-center">
           <Link
             to="/"
-            className="text-4xl sm:text-5xl font-normal text-dark-grey dark:text-off-white inline-block transition-colors"
+            className="text-4xl sm:text-5xl font-normal text-dark-grey inline-block"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Flipcard
           </Link>
           <h2
-            className="mt-4 sm:mt-6 text-2xl sm:text-3xl font-normal text-dark-grey dark:text-off-white transition-colors"
+            className="mt-4 sm:mt-6 text-2xl sm:text-3xl font-normal text-dark-grey"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             {step === 1 ? "Forgot Password" : "Reset Password"}
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-dark-grey/60 dark:text-off-white/60 font-light transition-colors">
+          <p className="mt-2 text-sm sm:text-base text-dark-grey/60 font-light">
             {step === 1
               ? "Enter your email and date of birth to verify your identity"
               : "Create a new password for your account"}
@@ -118,7 +118,7 @@ const ForgotPassword = () => {
         </div>
 
         {/* Form */}
-        <div className="bg-off-white dark:bg-muted-slate rounded-lg p-6 sm:p-8 transition-colors">
+        <div className="bg-off-white rounded-lg p-6 sm:p-8">
           {step === 1 ? (
             // Step 1: Verify Email and DOB
             <form onSubmit={handleVerify} className="space-y-5">

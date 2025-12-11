@@ -113,28 +113,26 @@ const Account = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#F5F3EF]">
       <div className="max-w-4xl mx-auto px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="mb-8">
           <h1
-            className="text-3xl md:text-4xl font-normal text-dark-grey dark:text-off-white mb-2 transition-colors"
+            className="text-3xl md:text-4xl font-normal text-dark-grey mb-2"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             My Account
           </h1>
-          <p className="text-dark-grey/60 dark:text-off-white/60 transition-colors">
-            Manage your account settings
-          </p>
+          <p className="text-dark-grey/60">Manage your account settings</p>
         </div>
 
         {/* Success/Error Message */}
         {message.text && (
           <div
-            className={`mb-6 p-4 rounded-lg transition-colors ${
+            className={`mb-6 p-4 rounded-lg ${
               message.type === "success"
-                ? "bg-soft-teal/10 dark:bg-soft-teal/20 text-dark-grey dark:text-off-white border border-soft-teal/30"
-                : "bg-muted-slate/20 dark:bg-muted-slate/30 text-dark-grey dark:text-off-white border border-muted-slate/30"
+                ? "bg-soft-teal/10 text-dark-grey border border-soft-teal/30"
+                : "bg-muted-slate/20 text-dark-grey border border-muted-slate/30"
             }`}
           >
             {message.text}
@@ -142,7 +140,7 @@ const Account = () => {
         )}
 
         {/* Profile Information */}
-        <div className="bg-off-white dark:bg-muted-slate rounded-lg p-6 mb-6 transition-colors">
+        <div className="bg-off-white rounded-lg p-6 mb-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-medium text-dark-grey">
               Profile Information
@@ -246,13 +244,13 @@ const Account = () => {
         </div>
 
         {/* Change Password */}
-        <div className="bg-white dark:bg-muted-slate rounded-lg  p-6 transition-colors">
+        <div className="bg-white rounded-lg  p-6">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-xl font-medium text-dark-grey dark:text-off-white transition-colors">
+              <h2 className="text-xl font-medium text-dark-grey">
                 Password & Security
               </h2>
-              <p className="text-sm text-dark-grey/60 dark:text-off-white/60 mt-1 transition-colors">
+              <p className="text-sm text-dark-grey/60 mt-1">
                 Update your password to keep your account secure
               </p>
             </div>
@@ -358,9 +356,7 @@ const Account = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
           <div className="bg-white rounded-lg  p-6 text-center">
             <div className="text-3xl font-medium text-soft-teal mb-2">0</div>
-            <div className="text-sm text-dark-grey/60 dark:text-off-white/60 transition-colors">
-              Total Orders
-            </div>
+            <div className="text-sm text-dark-grey/60">Total Orders</div>
           </div>
           <div className="bg-white rounded-lg  p-6 text-center">
             <div className="text-3xl font-medium text-soft-teal mb-2">₹0</div>

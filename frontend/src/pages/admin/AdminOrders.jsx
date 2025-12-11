@@ -55,27 +55,27 @@ const AdminOrders = () => {
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen bg-off-white py-8">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 text-muted-slate dark:text-off-white/60 mb-2 transition-colors">
+          <div className="flex items-center gap-2 text-muted-slate mb-2">
             <Link to="/admin" className="hover:text-soft-teal">
               Dashboard
             </Link>
             <span>/</span>
             <span>Orders</span>
           </div>
-          <h1 className="text-4xl font-bold text-dark-grey dark:text-off-white mb-2 transition-colors">
+          <h1 className="text-4xl font-bold text-dark-grey mb-2">
             Manage Orders
           </h1>
-          <p className="text-muted-slate dark:text-off-white/70 transition-colors">
+          <p className="text-muted-slate">
             View and manage all customer orders
           </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="bg-warm-grey/20 dark:bg-muted-slate/20 rounded-lg p-5 mb-6 transition-colors">
+        <div className="bg-warm-grey/20 rounded-lg p-5 mb-6">
           <div className="flex flex-wrap gap-2">
             {[
               "all",
@@ -88,10 +88,10 @@ const AdminOrders = () => {
               <button
                 key={status}
                 onClick={() => setFilter(status)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
                   filter === status
                     ? "bg-soft-teal text-off-white"
-                    : "bg-off-white dark:bg-dark-grey text-dark-grey dark:text-off-white hover:bg-warm-grey/10 dark:hover:bg-muted-slate/20"
+                    : "bg-off-white text-dark-grey hover:bg-warm-grey/10"
                 }`}
               >
                 {status.charAt(0).toUpperCase() + status.slice(1)}
@@ -109,8 +109,8 @@ const AdminOrders = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-warm-grey/20 dark:bg-muted-slate/20 rounded-lg p-5 transition-colors">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div className="bg-warm-grey/20 rounded-lg p-5">
             <div className="text-3xl font-bold text-dark-grey">
               {orders.length}
             </div>
@@ -135,19 +135,17 @@ const AdminOrders = () => {
                 .reduce((sum, o) => sum + parseFloat(o.total_amount || 0), 0)
                 .toFixed(2)}
             </div>
-            <div className="text-sm text-muted-slate dark:text-off-white/70 transition-colors">
-              Total Revenue
-            </div>
+            <div className="text-sm text-muted-slate">Total Revenue</div>
           </div>
         </div>
 
         {/* Orders Table */}
-        <div className="bg-off-white dark:bg-dark-grey rounded-lg overflow-hidden transition-colors">
+        <div className="bg-off-white rounded-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-warm-grey/20 dark:bg-muted-slate/20 transition-colors">
+              <thead className="bg-warm-grey/20">
                 <tr>
-                  <th className="text-left py-4 px-6 text-dark-grey dark:text-off-white font-semibold transition-colors">
+                  <th className="text-left py-4 px-6 text-dark-grey font-semibold">
                     Order ID
                   </th>
                   <th className="text-left py-4 px-6 text-dark-grey font-semibold">
@@ -178,7 +176,7 @@ const AdminOrders = () => {
                   <tr>
                     <td
                       colSpan="8"
-                      className="text-center py-12 text-muted-slate dark:text-off-white/60 transition-colors"
+                      className="text-center py-12 text-muted-slate"
                     >
                       <Package size={48} className="mx-auto mb-4 opacity-50" />
                       <p>No orders found</p>
@@ -194,23 +192,23 @@ const AdminOrders = () => {
                     return (
                       <tr
                         key={order.id}
-                        className="border-t border-warm-grey dark:border-muted-slate/30 hover:bg-off-white/50 dark:hover:bg-muted-slate/10 transition-colors"
+                        className="border-t border-warm-grey hover:bg-off-white/50 transition"
                       >
                         <td className="py-4 px-6">
-                          <div className="font-medium text-dark-grey dark:text-off-white transition-colors">
+                          <div className="font-medium text-dark-grey">
                             #{order.order_number || order.id}
                           </div>
                         </td>
                         <td className="py-4 px-6">
-                          <div className="text-dark-grey dark:text-off-white transition-colors">
+                          <div className="text-dark-grey">
                             {order.user_name}
                           </div>
-                          <div className="text-sm text-muted-slate dark:text-off-white/60 transition-colors">
+                          <div className="text-sm text-muted-slate">
                             {order.user_email}
                           </div>
                         </td>
                         <td className="py-4 px-6">
-                          <div className="flex items-center gap-1 text-muted-slate dark:text-off-white/70 transition-colors">
+                          <div className="flex items-center gap-1 text-muted-slate">
                             <Calendar size={14} />
                             <span className="text-sm">
                               {new Date(order.created_at).toLocaleDateString(
@@ -225,7 +223,7 @@ const AdminOrders = () => {
                           </div>
                         </td>
                         <td className="py-4 px-6">
-                          <div className="flex items-center gap-1 text-dark-grey dark:text-off-white font-semibold transition-colors">
+                          <div className="flex items-center gap-1 text-dark-grey font-semibold">
                             <DollarSign size={16} />
                             <span>
                               ₹{parseFloat(order.total_amount || 0).toFixed(2)}

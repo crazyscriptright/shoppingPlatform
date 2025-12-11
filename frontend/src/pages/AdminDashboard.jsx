@@ -153,17 +153,15 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen bg-off-white py-8">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-dark-grey dark:text-off-white mb-2 transition-colors">
+            <h1 className="text-4xl font-bold text-dark-grey mb-2">
               Admin Dashboard
             </h1>
-            <p className="text-muted-slate dark:text-off-white/70 transition-colors">
-              Manage your store and products
-            </p>
+            <p className="text-muted-slate">Manage your store and products</p>
           </div>
           <Button
             onClick={() => handleOpenModal()}
@@ -176,7 +174,7 @@ const AdminDashboard = () => {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-gradient-to-br from-soft-teal to-muted-slate text-off-white rounded-lg p-6">
+          <div className="bg-linear-to-br from-soft-teal to-muted-slate text-off-white rounded-lg p-6">
             <div className="flex items-center justify-between mb-4">
               <Package size={32} />
               <TrendingUp size={24} className="text-warm-grey" />
@@ -185,7 +183,7 @@ const AdminDashboard = () => {
             <p className="text-warm-grey">Total Products</p>
           </div>
 
-          <div className="bg-gradient-to-br from-muted-slate to-dark-grey text-off-white rounded-lg p-6">
+          <div className="bg-linear-to-br from-muted-slate to-dark-grey text-off-white rounded-lg p-6">
             <div className="flex items-center justify-between mb-4">
               <ShoppingBag size={32} />
               <TrendingUp size={24} className="text-warm-grey" />
@@ -194,7 +192,7 @@ const AdminDashboard = () => {
             <p className="text-warm-grey">Total Orders</p>
           </div>
 
-          <div className="bg-gradient-to-br from-soft-teal to-dark-grey text-off-white rounded-lg p-6">
+          <div className="bg-linear-to-br from-soft-teal to-dark-grey text-off-white rounded-lg p-6">
             <div className="flex items-center justify-between mb-4">
               <Users size={32} />
               <TrendingUp size={24} className="text-warm-grey" />
@@ -203,7 +201,7 @@ const AdminDashboard = () => {
             <p className="text-warm-grey">Total Users</p>
           </div>
 
-          <div className="bg-gradient-to-br from-muted-slate to-soft-teal text-off-white rounded-lg p-6">
+          <div className="bg-linear-to-br from-muted-slate to-soft-teal text-off-white rounded-lg p-6">
             <div className="flex items-center justify-between mb-4">
               <DollarSign size={32} />
               <TrendingUp size={24} className="text-warm-grey" />
@@ -228,9 +226,7 @@ const AdminDashboard = () => {
             <h3 className="text-xl font-semibold text-dark-grey mb-2">
               Manage Products
             </h3>
-            <p className="text-muted-slate dark:text-off-white/70 transition-colors">
-              Add, edit, or remove products
-            </p>
+            <p className="text-muted-slate">Add, edit, or remove products</p>
           </Link>
 
           <Link
@@ -263,14 +259,14 @@ const AdminDashboard = () => {
         </div>
 
         {/* Recent Products */}
-        <div className="bg-warm-grey dark:bg-muted-slate rounded-lg p-6 transition-colors">
-          <h2 className="text-2xl font-bold text-dark-grey dark:text-off-white mb-6 transition-colors">
+        <div className="bg-warm-grey rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-dark-grey mb-6">
             Recent Products
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-muted-slate dark:border-muted-slate/50 transition-colors">
+                <tr className="border-b border-muted-slate">
                   <th className="text-left py-3 px-4 text-dark-grey font-semibold">
                     Image
                   </th>
@@ -295,7 +291,7 @@ const AdminDashboard = () => {
                 {products.slice(0, 10).map((product) => (
                   <tr
                     key={product.id}
-                    className="border-b border-warm-grey dark:border-muted-slate/50 hover:bg-off-white dark:hover:bg-[#1a1d1e]/50 transition-colors"
+                    className="border-b border-warm-grey hover:bg-off-white transition"
                   >
                     <td className="py-3 px-4">
                       <img
@@ -304,13 +300,11 @@ const AdminDashboard = () => {
                         className="w-12 h-12 object-cover rounded"
                       />
                     </td>
-                    <td className="py-3 px-4 text-dark-grey dark:text-off-white transition-colors">
-                      {product.name}
-                    </td>
-                    <td className="py-3 px-4 text-muted-slate dark:text-off-white/70 transition-colors">
+                    <td className="py-3 px-4 text-dark-grey">{product.name}</td>
+                    <td className="py-3 px-4 text-muted-slate">
                       {product.category}
                     </td>
-                    <td className="py-3 px-4 text-dark-grey dark:text-off-white font-semibold transition-colors">
+                    <td className="py-3 px-4 text-dark-grey font-semibold">
                       ₹{parseFloat(product.price || 0).toFixed(2)}
                     </td>
                     <td className="py-3 px-4">

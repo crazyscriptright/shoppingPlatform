@@ -14,12 +14,12 @@ const Cart = () => {
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen py-20">
+      <div className="min-h-screen bg-off-white py-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-dark-grey dark:text-off-white mb-4 transition-colors">
+          <h2 className="text-3xl font-bold text-dark-grey mb-4">
             Your Cart is Empty
           </h2>
-          <p className="text-muted-slate dark:text-off-white/70 mb-8 transition-colors">
+          <p className="text-muted-slate mb-8">
             Add some products to get started!
           </p>
           <Link to="/shop">
@@ -36,41 +36,27 @@ const Cart = () => {
   const total = subtotal + shipping + tax;
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen bg-off-white py-8">
       <div className="container mx-auto px-4">
         {/* Breadcrumb */}
         <nav className="text-sm mb-8">
-          <Link
-            to="/"
-            className="text-muted-slate dark:text-off-white/70 hover:text-soft-teal transition-colors"
-          >
+          <Link to="/" className="text-muted-slate hover:text-soft-teal">
             Home
           </Link>
-          <span className="mx-2 text-muted-slate dark:text-off-white/70 transition-colors">
-            &gt;
-          </span>
-          <Link
-            to="/shop"
-            className="text-muted-slate dark:text-off-white/70 hover:text-soft-teal transition-colors"
-          >
+          <span className="mx-2 text-muted-slate">&gt;</span>
+          <Link to="/shop" className="text-muted-slate hover:text-soft-teal">
             Shop
           </Link>
-          <span className="mx-2 text-muted-slate dark:text-off-white/70 transition-colors">
-            &gt;
-          </span>
-          <span className="text-dark-grey dark:text-off-white transition-colors">
-            Cart
-          </span>
+          <span className="mx-2 text-muted-slate">&gt;</span>
+          <span className="text-dark-grey">Cart</span>
         </nav>
 
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-4xl font-bold text-dark-grey dark:text-off-white transition-colors">
-            Your Cart
-          </h1>
+          <h1 className="text-4xl font-bold text-dark-grey">Your Cart</h1>
           <Link
             to="/shop"
-            className="flex items-center gap-2 text-soft-teal hover:underline transition-colors"
+            className="flex items-center gap-2 text-soft-teal hover:underline"
           >
             <ArrowLeft size={20} />
             Continue Shopping
@@ -83,10 +69,10 @@ const Cart = () => {
             {cart.map((item) => (
               <div
                 key={item.id}
-                className="bg-warm-grey dark:bg-muted-slate rounded-lg p-6 flex gap-6 transition-colors"
+                className="bg-warm-grey rounded-lg p-6 flex gap-6"
               >
                 {/* Product Image */}
-                <div className="w-32 h-32 bg-off-white dark:bg-[#1a1d1e] rounded-lg overflow-hidden flex-shrink-0 transition-colors">
+                <div className="w-32 h-32 bg-off-white rounded-lg overflow-hidden flex-shrink-0">
                   <img
                     src={item.image || "/placeholder-product.jpg"}
                     alt={item.name}
@@ -100,17 +86,17 @@ const Cart = () => {
                     <div>
                       <Link
                         to={`/product/${item.id}`}
-                        className="text-xl font-semibold text-dark-grey dark:text-off-white hover:text-soft-teal transition-colors"
+                        className="text-xl font-semibold text-dark-grey hover:text-soft-teal"
                       >
                         {item.name}
                       </Link>
-                      <p className="text-muted-slate dark:text-off-white/70 text-sm transition-colors">
+                      <p className="text-muted-slate text-sm">
                         {item.category}
                       </p>
                     </div>
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="text-muted-slate dark:text-off-white/70 hover:text-dark-grey dark:hover:text-off-white transition-colors"
+                      className="text-muted-slate hover:text-dark-grey transition"
                     >
                       <Trash2 size={20} />
                     </button>
@@ -118,16 +104,16 @@ const Cart = () => {
 
                   <div className="flex items-center justify-between mt-4">
                     {/* Quantity Controls */}
-                    <div className="flex items-center bg-warm-grey/10 dark:bg-[#1a1d1e]/50 rounded-lg transition-colors">
+                    <div className="flex items-center bg-warm-grey/10 rounded-lg">
                       <button
                         onClick={() =>
                           updateQuantity(item.id, item.quantity - 1)
                         }
-                        className="px-3 py-1 hover:bg-off-white dark:hover:bg-muted-slate transition-colors text-dark-grey dark:text-off-white"
+                        className="px-3 py-1 hover:bg-off-white transition"
                       >
                         <Minus size={16} />
                       </button>
-                      <span className="px-4 py-1 font-semibold text-dark-grey dark:text-off-white transition-colors">
+                      <span className="px-4 py-1 font-semibold">
                         {item.quantity}
                       </span>
                       <button
@@ -143,10 +129,10 @@ const Cart = () => {
 
                     {/* Price */}
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-dark-grey dark:text-off-white transition-colors">
+                      <p className="text-2xl font-bold text-dark-grey">
                         ₹{(parseFloat(item.price) * item.quantity).toFixed(2)}
                       </p>
-                      <p className="text-sm text-muted-slate dark:text-off-white/70 transition-colors">
+                      <p className="text-sm text-muted-slate">
                         ₹{parseFloat(item.price).toFixed(2)} each
                       </p>
                     </div>
@@ -176,8 +162,8 @@ const Cart = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-warm-grey dark:bg-muted-slate rounded-lg p-6 sticky top-24 transition-colors">
-              <h2 className="text-2xl font-bold text-dark-grey dark:text-off-white mb-6 transition-colors">
+            <div className="bg-warm-grey rounded-lg p-6 sticky top-24">
+              <h2 className="text-2xl font-bold text-dark-grey mb-6">
                 Order Summary
               </h2>
 
@@ -204,8 +190,8 @@ const Cart = () => {
                   </div>
                 )}
 
-                <div className="border-t border-muted-slate dark:border-muted-slate/50 pt-4 transition-colors">
-                  <div className="flex justify-between text-dark-grey dark:text-off-white text-xl font-bold transition-colors">
+                <div className="border-t border-muted-slate pt-4">
+                  <div className="flex justify-between text-dark-grey text-xl font-bold">
                     <span>Total</span>
                     <span>${total.toFixed(2)}</span>
                   </div>

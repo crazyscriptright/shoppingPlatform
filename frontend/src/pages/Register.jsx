@@ -67,33 +67,33 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-[calc(100vh-64px)] bg-[#F5F3EF] flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6">
         {/* Header */}
         <div className="text-center">
           <Link
             to="/"
-            className="text-4xl sm:text-5xl font-normal text-dark-grey dark:text-off-white inline-block transition-colors"
+            className="text-4xl sm:text-5xl font-normal text-dark-grey inline-block"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Flipcard
           </Link>
           <h2
-            className="mt-4 sm:mt-6 text-2xl sm:text-3xl font-normal text-dark-grey dark:text-off-white transition-colors"
+            className="mt-4 sm:mt-6 text-2xl sm:text-3xl font-normal text-dark-grey"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Create Account
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-dark-grey/60 dark:text-off-white/60 font-light transition-colors">
+          <p className="mt-2 text-sm sm:text-base text-dark-grey/60 font-light">
             Sign up to start shopping
           </p>
         </div>
 
         {/* Register Form */}
-        <div className="bg-off-white dark:bg-muted-slate rounded-lg p-6 sm:p-8 transition-colors">
+        <div className="bg-off-white rounded-lg p-6 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
             {error && (
-              <div className="bg-muted-slate/10 dark:bg-muted-slate/20 border border-muted-slate/30 text-dark-grey dark:text-off-white px-4 py-3 rounded-lg text-sm transition-colors">
+              <div className="bg-muted-slate/10 border border-muted-slate/30 text-dark-grey px-4 py-3 rounded-lg text-sm">
                 {error}
               </div>
             )}
@@ -208,7 +208,7 @@ const Register = () => {
                 required
                 className="rounded border-warm-grey/50 text-soft-teal focus:ring-soft-teal w-4 h-4 mt-0.5 flex-shrink-0"
               />
-              <label className="text-xs sm:text-sm text-dark-grey/70 dark:text-off-white/70 transition-colors">
+              <label className="text-xs sm:text-sm text-dark-grey/70">
                 I agree to the{" "}
                 <Link
                   to="/terms"
@@ -241,7 +241,7 @@ const Register = () => {
 
           {/* Sign In Link */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-dark-grey/60 dark:text-off-white/60 transition-colors">
+            <p className="text-sm text-dark-grey/60">
               Already have an account?{" "}
               <Link
                 to="/login"

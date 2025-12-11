@@ -59,34 +59,32 @@ const AdminUsers = () => {
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen bg-off-white py-8">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 text-muted-slate dark:text-off-white/60 mb-2 transition-colors">
+          <div className="flex items-center gap-2 text-muted-slate mb-2">
             <Link to="/admin" className="hover:text-soft-teal">
               Dashboard
             </Link>
             <span>/</span>
             <span>Users</span>
           </div>
-          <h1 className="text-4xl font-bold text-dark-grey dark:text-off-white mb-2 transition-colors">
+          <h1 className="text-4xl font-bold text-dark-grey mb-2">
             Manage Users
           </h1>
-          <p className="text-muted-slate dark:text-off-white/70 transition-colors">
+          <p className="text-muted-slate">
             View and manage all registered users
           </p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-warm-grey/20 dark:bg-muted-slate/20 rounded-lg p-5 transition-colors">
-            <div className="text-3xl font-bold text-dark-grey dark:text-off-white transition-colors">
+          <div className="bg-warm-grey/20 rounded-lg p-5">
+            <div className="text-3xl font-bold text-dark-grey">
               {users.length}
             </div>
-            <div className="text-sm text-muted-slate dark:text-off-white/70 mt-1 transition-colors">
-              Total Users
-            </div>
+            <div className="text-sm text-muted-slate mt-1">Total Users</div>
           </div>
           <div className="bg-warm-grey/20 rounded-lg p-5">
             <div className="text-3xl font-bold text-dark-grey">
@@ -103,12 +101,12 @@ const AdminUsers = () => {
         </div>
 
         {/* Filters */}
-        <div className="bg-warm-grey/20 dark:bg-muted-slate/20 rounded-lg p-5 mb-6 transition-colors">
+        <div className="bg-warm-grey/20 rounded-lg p-5 mb-6">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
               <Search
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-slate dark:text-off-white/60 transition-colors"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-slate"
                 size={20}
               />
               <input
@@ -116,7 +114,7 @@ const AdminUsers = () => {
                 placeholder="Search by name or email..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-off-white dark:bg-dark-grey text-dark-grey dark:text-off-white placeholder-muted-slate dark:placeholder-off-white/50 focus:outline-none focus:ring-2 focus:ring-soft-teal transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-off-white text-dark-grey placeholder-muted-slate focus:outline-none focus:ring-2 focus:ring-soft-teal transition"
               />
             </div>
 
@@ -126,10 +124,10 @@ const AdminUsers = () => {
                 <button
                   key={role}
                   onClick={() => setRoleFilter(role)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
                     roleFilter === role
                       ? "bg-soft-teal text-off-white"
-                      : "bg-off-white dark:bg-dark-grey text-dark-grey dark:text-off-white hover:bg-warm-grey/10 dark:hover:bg-muted-slate/20"
+                      : "bg-off-white text-dark-grey hover:bg-warm-grey/10"
                   }`}
                 >
                   {role.charAt(0).toUpperCase() + role.slice(1)}
@@ -140,12 +138,12 @@ const AdminUsers = () => {
         </div>
 
         {/* Users Table */}
-        <div className="bg-off-white dark:bg-dark-grey rounded-lg overflow-hidden transition-colors">
+        <div className="bg-off-white rounded-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-warm-grey/20 dark:bg-muted-slate/20 transition-colors">
+              <thead className="bg-warm-grey/20">
                 <tr>
-                  <th className="text-left py-4 px-6 text-dark-grey dark:text-off-white font-semibold transition-colors">
+                  <th className="text-left py-4 px-6 text-dark-grey font-semibold">
                     ID
                   </th>
                   <th className="text-left py-4 px-6 text-dark-grey font-semibold">
@@ -167,7 +165,7 @@ const AdminUsers = () => {
                   <tr>
                     <td
                       colSpan="5"
-                      className="text-center py-12 text-muted-slate dark:text-off-white/60 transition-colors"
+                      className="text-center py-12 text-muted-slate"
                     >
                       <UsersIcon
                         size={48}
@@ -180,7 +178,7 @@ const AdminUsers = () => {
                   filteredUsers.map((user) => (
                     <tr
                       key={user.id}
-                      className="border-t border-warm-grey dark:border-muted-slate/30 hover:bg-off-white/50 dark:hover:bg-muted-slate/10 transition-colors"
+                      className="border-t border-warm-grey hover:bg-off-white/50 transition"
                     >
                       <td className="py-4 px-6">
                         <div className="font-medium text-dark-grey">
@@ -193,7 +191,7 @@ const AdminUsers = () => {
                         </div>
                       </td>
                       <td className="py-4 px-6">
-                        <div className="flex items-center gap-2 text-muted-slate dark:text-off-white/70 transition-colors">
+                        <div className="flex items-center gap-2 text-muted-slate">
                           <Mail size={14} />
                           <span className="text-sm">{user.email}</span>
                         </div>
@@ -209,7 +207,7 @@ const AdminUsers = () => {
                         </span>
                       </td>
                       <td className="py-4 px-6">
-                        <div className="flex items-center gap-1 text-muted-slate dark:text-off-white/70 transition-colors">
+                        <div className="flex items-center gap-1 text-muted-slate">
                           <Calendar size={14} />
                           <span className="text-sm">
                             {new Date(user.created_at).toLocaleDateString(

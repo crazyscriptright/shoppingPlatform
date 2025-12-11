@@ -144,38 +144,26 @@ const ProductDetail = () => {
   const images = product.images || [product.image];
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen bg-off-white py-8">
       <div className="container mx-auto px-4">
         {/* Breadcrumb */}
         <nav className="text-sm mb-8">
-          <Link
-            to="/"
-            className="text-muted-slate dark:text-off-white/70 hover:text-soft-teal transition-colors"
-          >
+          <Link to="/" className="text-muted-slate hover:text-soft-teal">
             Home
           </Link>
-          <span className="mx-2 text-muted-slate dark:text-off-white/70 transition-colors">
-            &gt;
-          </span>
-          <Link
-            to="/shop"
-            className="text-muted-slate dark:text-off-white/70 hover:text-soft-teal transition-colors"
-          >
+          <span className="mx-2 text-muted-slate">&gt;</span>
+          <Link to="/shop" className="text-muted-slate hover:text-soft-teal">
             Shop
           </Link>
-          <span className="mx-2 text-muted-slate dark:text-off-white/70 transition-colors">
-            &gt;
-          </span>
-          <span className="text-dark-grey dark:text-off-white transition-colors">
-            {product.name}
-          </span>
+          <span className="mx-2 text-muted-slate">&gt;</span>
+          <span className="text-dark-grey">{product.name}</span>
         </nav>
 
         {/* Product Section */}
         <div className="grid md:grid-cols-2 gap-12 mb-16">
           {/* Images */}
           <div>
-            <div className="relative bg-warm-grey dark:bg-muted-slate rounded-lg overflow-hidden aspect-square mb-4 transition-colors">
+            <div className="relative bg-warm-grey rounded-lg overflow-hidden aspect-square mb-4">
               <img
                 src={images[selectedImage] || "/placeholder-product.jpg"}
                 alt={product.name}
@@ -189,7 +177,7 @@ const ProductDetail = () => {
                         (selectedImage - 1 + images.length) % images.length
                       )
                     }
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-off-white dark:bg-muted-slate p-2 rounded-full hover:bg-soft-teal hover:text-off-white transition-colors"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-off-white p-2 rounded-full hover:bg-soft-teal hover:text-off-white transition"
                   >
                     <ChevronLeft size={24} />
                   </button>
@@ -197,7 +185,7 @@ const ProductDetail = () => {
                     onClick={() =>
                       setSelectedImage((selectedImage + 1) % images.length)
                     }
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-off-white dark:bg-muted-slate p-2 rounded-full  hover:bg-soft-teal hover:text-off-white transition-colors"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-off-white p-2 rounded-full  hover:bg-soft-teal hover:text-off-white transition"
                   >
                     <ChevronRight size={24} />
                   </button>
@@ -212,10 +200,10 @@ const ProductDetail = () => {
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`aspect-square rounded-lg overflow-hidden border transition-colors ${
+                    className={`aspect-square rounded-lg overflow-hidden border ${
                       selectedImage === index
                         ? "border-soft-teal"
-                        : "border-warm-grey dark:border-muted-slate"
+                        : "border-warm-grey"
                     }`}
                   >
                     <img
@@ -231,7 +219,7 @@ const ProductDetail = () => {
 
           {/* Product Info */}
           <div>
-            <h1 className="text-4xl font-bold text-dark-grey dark:text-off-white mb-4 transition-colors">
+            <h1 className="text-4xl font-bold text-dark-grey mb-4">
               {product.name}
             </h1>
 
@@ -250,18 +238,18 @@ const ProductDetail = () => {
                   />
                 ))}
               </div>
-              <span className="text-muted-slate dark:text-off-white/70 transition-colors">
+              <span className="text-muted-slate">
                 ({product.reviews || 0} Reviews)
               </span>
             </div>
 
             {/* Price */}
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-4xl font-bold text-dark-grey dark:text-off-white transition-colors">
+              <span className="text-4xl font-bold text-dark-grey">
                 ₹{parseFloat(product.price || 0).toFixed(2)}
               </span>
               {product.originalPrice && (
-                <span className="text-2xl text-muted-slate dark:text-off-white/50 line-through transition-colors">
+                <span className="text-2xl text-muted-slate line-through">
                   ₹{parseFloat(product.originalPrice).toFixed(2)}
                 </span>
               )}
@@ -273,7 +261,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Description */}
-            <p className="text-muted-slate dark:text-off-white/70 mb-6 leading-relaxed transition-colors">
+            <p className="text-muted-slate mb-6 leading-relaxed">
               {product.description}
             </p>
 
@@ -290,23 +278,21 @@ const ProductDetail = () => {
 
             {/* Quantity Selector */}
             <div className="mb-6">
-              <label className="block text-dark-grey dark:text-off-white font-semibold mb-2 transition-colors">
+              <label className="block text-dark-grey font-semibold mb-2">
                 Quantity
               </label>
               <div className="flex items-center gap-4">
-                <div className="flex items-center bg-warm-grey/10 dark:bg-muted-slate/20 rounded-lg transition-colors">
+                <div className="flex items-center bg-warm-grey/10 rounded-lg">
                   <button
                     onClick={decrementQuantity}
-                    className="px-4 py-2 hover:bg-warm-grey dark:hover:bg-muted-slate transition-colors text-dark-grey dark:text-off-white"
+                    className="px-4 py-2 hover:bg-warm-grey transition"
                   >
                     -
                   </button>
-                  <span className="px-6 py-2 font-semibold text-dark-grey dark:text-off-white transition-colors">
-                    {quantity}
-                  </span>
+                  <span className="px-6 py-2 font-semibold">{quantity}</span>
                   <button
                     onClick={incrementQuantity}
-                    className="px-4 py-2 hover:bg-warm-grey dark:hover:bg-muted-slate transition-colors text-dark-grey dark:text-off-white"
+                    className="px-4 py-2 hover:bg-warm-grey transition"
                   >
                     +
                   </button>
@@ -328,10 +314,10 @@ const ProductDetail = () => {
               </Button>
               <button
                 onClick={handleToggleWishlist}
-                className={`p-4 rounded-lg transition-colors ${
+                className={`p-4 rounded-lg transition ${
                   isInWishlist(product.id)
                     ? "bg-soft-teal text-off-white"
-                    : "bg-warm-grey dark:bg-muted-slate hover:bg-soft-teal hover:text-off-white text-dark-grey dark:text-off-white"
+                    : "bg-warm-grey hover:bg-soft-teal hover:text-off-white"
                 }`}
               >
                 <Heart
@@ -342,36 +328,26 @@ const ProductDetail = () => {
             </div>
 
             {/* Features */}
-            <div className="space-y-4 border-t border-warm-grey dark:border-muted-slate pt-6 transition-colors">
+            <div className="space-y-4 border-t border-warm-grey pt-6">
               <div className="flex items-center gap-3">
                 <Truck className="text-soft-teal" size={24} />
                 <div>
-                  <p className="font-semibold text-dark-grey dark:text-off-white transition-colors">
-                    Free Shipping
-                  </p>
-                  <p className="text-sm text-muted-slate dark:text-off-white/70 transition-colors">
-                    On orders over ₹50
-                  </p>
+                  <p className="font-semibold text-dark-grey">Free Shipping</p>
+                  <p className="text-sm text-muted-slate">On orders over ₹50</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <RefreshCw className="text-soft-teal" size={24} />
                 <div>
-                  <p className="font-semibold text-dark-grey dark:text-off-white transition-colors">
-                    30-Day Returns
-                  </p>
-                  <p className="text-sm text-muted-slate dark:text-off-white/70 transition-colors">
-                    Easy return policy
-                  </p>
+                  <p className="font-semibold text-dark-grey">30-Day Returns</p>
+                  <p className="text-sm text-muted-slate">Easy return policy</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Shield className="text-soft-teal" size={24} />
                 <div>
-                  <p className="font-semibold text-dark-grey dark:text-off-white transition-colors">
-                    Secure Payment
-                  </p>
-                  <p className="text-sm text-muted-slate dark:text-off-white/70 transition-colors">
+                  <p className="font-semibold text-dark-grey">Secure Payment</p>
+                  <p className="text-sm text-muted-slate">
                     100% secure transactions
                   </p>
                 </div>
@@ -390,7 +366,7 @@ const ProductDetail = () => {
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <section className="mb-16">
-            <h2 className="text-3xl font-bold text-dark-grey dark:text-off-white mb-8 transition-colors">
+            <h2 className="text-3xl font-bold text-dark-grey mb-8">
               Similar Products
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

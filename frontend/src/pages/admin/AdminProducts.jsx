@@ -141,11 +141,11 @@ const AdminProducts = () => {
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen bg-off-white py-8">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 text-muted-slate dark:text-off-white/60 mb-2 transition-colors">
+          <div className="flex items-center gap-2 text-muted-slate mb-2">
             <Link to="/admin" className="hover:text-soft-teal">
               Dashboard
             </Link>
@@ -154,10 +154,10 @@ const AdminProducts = () => {
           </div>
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-dark-grey dark:text-off-white mb-2 transition-colors">
+              <h1 className="text-4xl font-bold text-dark-grey mb-2">
                 Manage Products
               </h1>
-              <p className="text-muted-slate dark:text-off-white/70 transition-colors">
+              <p className="text-muted-slate">
                 Add, edit, or remove products from your store
               </p>
             </div>
@@ -173,13 +173,11 @@ const AdminProducts = () => {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-warm-grey/20 dark:bg-muted-slate/20 rounded-lg p-5 transition-colors">
-            <div className="text-3xl font-bold text-dark-grey dark:text-off-white transition-colors">
+          <div className="bg-warm-grey/20 rounded-lg p-5">
+            <div className="text-3xl font-bold text-dark-grey">
               {products.length}
             </div>
-            <div className="text-sm text-muted-slate dark:text-off-white/70 mt-1 transition-colors">
-              Total Products
-            </div>
+            <div className="text-sm text-muted-slate mt-1">Total Products</div>
           </div>
           <div className="bg-warm-grey/20 rounded-lg p-5">
             <div className="text-3xl font-bold text-dark-grey">
@@ -202,12 +200,12 @@ const AdminProducts = () => {
         </div>
 
         {/* Filters */}
-        <div className="bg-warm-grey/20 dark:bg-muted-slate/20 rounded-lg p-5 mb-6 transition-colors">
+        <div className="bg-warm-grey/20 rounded-lg p-5 mb-6">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
               <Search
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-slate dark:text-off-white/60 transition-colors"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-slate"
                 size={20}
               />
               <input
@@ -215,7 +213,7 @@ const AdminProducts = () => {
                 placeholder="Search products..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-off-white dark:bg-dark-grey text-dark-grey dark:text-off-white placeholder-muted-slate dark:placeholder-off-white/50 focus:outline-none focus:ring-2 focus:ring-soft-teal transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-off-white text-dark-grey placeholder-muted-slate focus:outline-none focus:ring-2 focus:ring-soft-teal transition"
               />
             </div>
 
@@ -225,10 +223,10 @@ const AdminProducts = () => {
                 <button
                   key={category}
                   onClick={() => setCategoryFilter(category)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition ${
                     categoryFilter === category
                       ? "bg-soft-teal text-off-white"
-                      : "bg-off-white dark:bg-dark-grey text-dark-grey dark:text-off-white hover:bg-warm-grey/10 dark:hover:bg-muted-slate/20"
+                      : "bg-off-white text-dark-grey hover:bg-warm-grey/10"
                   }`}
                 >
                   {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -239,12 +237,12 @@ const AdminProducts = () => {
         </div>
 
         {/* Products Table */}
-        <div className="bg-off-white dark:bg-dark-grey rounded-lg overflow-hidden transition-colors">
+        <div className="bg-off-white rounded-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-warm-grey/20 dark:bg-muted-slate/20 transition-colors">
+              <thead className="bg-warm-grey/20">
                 <tr>
-                  <th className="text-left py-4 px-6 text-dark-grey dark:text-off-white font-semibold transition-colors">
+                  <th className="text-left py-4 px-6 text-dark-grey font-semibold">
                     Image
                   </th>
                   <th className="text-left py-4 px-6 text-dark-grey font-semibold">
@@ -269,7 +267,7 @@ const AdminProducts = () => {
                   <tr>
                     <td
                       colSpan="6"
-                      className="text-center py-12 text-muted-slate dark:text-off-white/60 transition-colors"
+                      className="text-center py-12 text-muted-slate"
                     >
                       <Package size={48} className="mx-auto mb-4 opacity-50" />
                       <p>No products found</p>
@@ -279,7 +277,7 @@ const AdminProducts = () => {
                   filteredProducts.map((product) => (
                     <tr
                       key={product.id}
-                      className="border-t border-warm-grey dark:border-muted-slate/30 hover:bg-off-white/50 dark:hover:bg-muted-slate/10 transition-colors"
+                      className="border-t border-warm-grey hover:bg-off-white/50 transition"
                     >
                       <td className="py-4 px-6">
                         <img
@@ -289,14 +287,14 @@ const AdminProducts = () => {
                         />
                       </td>
                       <td className="py-4 px-6">
-                        <div className="font-medium text-dark-grey dark:text-off-white transition-colors">
+                        <div className="font-medium text-dark-grey">
                           {product.name}
                         </div>
                       </td>
-                      <td className="py-4 px-6 text-muted-slate dark:text-off-white/70 transition-colors">
+                      <td className="py-4 px-6 text-muted-slate">
                         {product.category}
                       </td>
-                      <td className="py-4 px-6 text-dark-grey dark:text-off-white font-semibold transition-colors">
+                      <td className="py-4 px-6 text-dark-grey font-semibold">
                         ₹{parseFloat(product.price || 0).toFixed(2)}
                       </td>
                       <td className="py-4 px-6">

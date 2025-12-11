@@ -48,12 +48,12 @@ const Checkout = () => {
 
   if (cart.length === 0 && !paymentSuccess) {
     return (
-      <div className="min-h-screen py-20">
+      <div className="min-h-screen bg-off-white py-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-dark-grey dark:text-off-white mb-4 transition-colors">
+          <h2 className="text-3xl font-bold text-dark-grey mb-4">
             Your Cart is Empty
           </h2>
-          <p className="text-muted-slate dark:text-off-white/70 mb-8 transition-colors">
+          <p className="text-muted-slate mb-8">
             Add some products to checkout!
           </p>
           <Link to="/shop">
@@ -70,41 +70,27 @@ const Checkout = () => {
   const total = subtotal + shipping + tax;
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen bg-off-white py-8">
       <div className="container mx-auto px-4">
         {/* Breadcrumb */}
         <nav className="text-sm mb-8">
-          <Link
-            to="/"
-            className="text-muted-slate dark:text-off-white/70 hover:text-soft-teal transition-colors"
-          >
+          <Link to="/" className="text-muted-slate hover:text-soft-teal">
             Home
           </Link>
-          <span className="mx-2 text-muted-slate dark:text-off-white/70 transition-colors">
-            &gt;
-          </span>
-          <Link
-            to="/cart"
-            className="text-muted-slate dark:text-off-white/70 hover:text-soft-teal transition-colors"
-          >
+          <span className="mx-2 text-muted-slate">&gt;</span>
+          <Link to="/cart" className="text-muted-slate hover:text-soft-teal">
             Cart
           </Link>
-          <span className="mx-2 text-muted-slate dark:text-off-white/70 transition-colors">
-            &gt;
-          </span>
-          <span className="text-dark-grey dark:text-off-white transition-colors">
-            Checkout
-          </span>
+          <span className="mx-2 text-muted-slate">&gt;</span>
+          <span className="text-dark-grey">Checkout</span>
         </nav>
 
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-4xl font-bold text-dark-grey dark:text-off-white transition-colors">
-            Checkout
-          </h1>
+          <h1 className="text-4xl font-bold text-dark-grey">Checkout</h1>
           <Link
             to="/cart"
-            className="flex items-center gap-2 text-soft-teal hover:underline transition-colors"
+            className="flex items-center gap-2 text-soft-teal hover:underline"
           >
             <ArrowLeft size={20} />
             Back to Cart
@@ -114,14 +100,14 @@ const Checkout = () => {
         <div className="grid lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
           {/* Shipping Form */}
           <div className="lg:col-span-3">
-            <div className="bg-off-white dark:bg-muted-slate rounded-lg p-5 sm:p-6 transition-colors">
-              <h2 className="text-xl font-bold text-dark-grey dark:text-off-white mb-4 flex items-center gap-2 transition-colors">
+            <div className="bg-off-white rounded-lg p-5 sm:p-6">
+              <h2 className="text-xl font-bold text-dark-grey mb-4 flex items-center gap-2">
                 <MapPin className="text-soft-teal" size={20} />
                 Shipping Information
               </h2>
 
               {paymentError && (
-                <div className="bg-soft-teal/10 dark:bg-soft-teal/20 border border-soft-teal/30 text-dark-grey dark:text-off-white px-4 py-3 rounded-lg mb-4 text-sm transition-colors">
+                <div className="bg-soft-teal/10 border border-soft-teal/30 text-dark-grey px-4 py-3 rounded-lg mb-4 text-sm">
                   {paymentError}
                 </div>
               )}
@@ -135,11 +121,11 @@ const Checkout = () => {
                     onChange={handleChange}
                     placeholder="Full Name *"
                     required
-                    className="w-full px-3 py-2 border border-warm-grey/50 dark:border-muted-slate rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm bg-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white transition-colors"
+                    className="w-full px-3 py-2 border border-warm-grey/50 rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm"
                   />
                   <div className="relative">
                     <MailIcon
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-slate dark:text-off-white/50 pointer-events-none transition-colors"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-slate pointer-events-none"
                       size={14}
                     />
                     <input
@@ -149,14 +135,14 @@ const Checkout = () => {
                       onChange={handleChange}
                       placeholder="Email Address *"
                       required
-                      className="w-full pl-9 pr-3 py-2 border border-warm-grey/50 dark:border-muted-slate rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm bg-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white transition-colors"
+                      className="w-full pl-9 pr-3 py-2 border border-warm-grey/50 rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm"
                     />
                   </div>
                 </div>
 
                 <div className="relative">
                   <Phone
-                    className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-slate dark:text-off-white/50 pointer-events-none transition-colors"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-slate pointer-events-none"
                     size={14}
                   />
                   <input
@@ -166,7 +152,7 @@ const Checkout = () => {
                     onChange={handleChange}
                     placeholder="Phone Number *"
                     required
-                    className="w-full pl-9 pr-3 py-2 border border-warm-grey/50 dark:border-muted-slate rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm bg-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white transition-colors"
+                    className="w-full pl-9 pr-3 py-2 border border-warm-grey/50 rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm"
                   />
                 </div>
 
@@ -177,7 +163,7 @@ const Checkout = () => {
                   onChange={handleChange}
                   placeholder="Street Address *"
                   required
-                  className="w-full px-3 py-2 border border-warm-grey/50 dark:border-muted-slate rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm bg-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white transition-colors"
+                  className="w-full px-3 py-2 border border-warm-grey/50 rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm"
                 />
 
                 <input
@@ -186,7 +172,7 @@ const Checkout = () => {
                   value={shippingAddress.address_line2}
                   onChange={handleChange}
                   placeholder="Apartment, suite (optional)"
-                  className="w-full px-3 py-2 border border-warm-grey/50 dark:border-muted-slate rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm bg-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white transition-colors"
+                  className="w-full px-3 py-2 border border-warm-grey/50 rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm"
                 />
 
                 <div className="grid sm:grid-cols-2 gap-2.5">
@@ -197,7 +183,7 @@ const Checkout = () => {
                     onChange={handleChange}
                     placeholder="City *"
                     required
-                    className="w-full px-3 py-2 border border-warm-grey/50 dark:border-muted-slate rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm bg-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white transition-colors"
+                    className="w-full px-3 py-2 border border-warm-grey/50 rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm"
                   />
                   <input
                     type="text"
@@ -206,7 +192,7 @@ const Checkout = () => {
                     onChange={handleChange}
                     placeholder="State *"
                     required
-                    className="w-full px-3 py-2 border border-warm-grey/50 dark:border-muted-slate rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm bg-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white transition-colors"
+                    className="w-full px-3 py-2 border border-warm-grey/50 rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm"
                   />
                 </div>
 
@@ -218,7 +204,7 @@ const Checkout = () => {
                     onChange={handleChange}
                     placeholder="Postal Code *"
                     required
-                    className="w-full px-3 py-2 border border-warm-grey/50 dark:border-muted-slate rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm bg-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white transition-colors"
+                    className="w-full px-3 py-2 border border-warm-grey/50 rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm"
                   />
                   <input
                     type="text"
@@ -227,7 +213,7 @@ const Checkout = () => {
                     onChange={handleChange}
                     placeholder="Country *"
                     required
-                    className="w-full px-3 py-2 border border-warm-grey/50 dark:border-muted-slate rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm bg-white dark:bg-[#1a1d1e] text-dark-grey dark:text-off-white transition-colors"
+                    className="w-full px-3 py-2 border border-warm-grey/50 rounded-md focus:outline-none focus:ring-1 focus:ring-soft-teal focus:border-transparent text-sm"
                   />
                 </div>
               </form>
@@ -236,8 +222,8 @@ const Checkout = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-2">
-            <div className="bg-off-white dark:bg-muted-slate rounded-lg p-5 sm:p-6 sticky top-24 transition-colors">
-              <h2 className="text-xl font-bold text-dark-grey dark:text-off-white mb-4 transition-colors">
+            <div className="bg-off-white rounded-lg p-5 sm:p-6 sticky top-24">
+              <h2 className="text-xl font-bold text-dark-grey mb-4">
                 Order Summary
               </h2>
 
@@ -245,7 +231,7 @@ const Checkout = () => {
               <div className="space-y-2.5 mb-4 max-h-56 overflow-y-auto">
                 {cart.map((item) => (
                   <div key={item.id} className="flex gap-3">
-                    <div className="w-16 h-16 bg-warm-grey/10 dark:bg-[#1a1d1e]/50 rounded overflow-hidden flex-shrink-0 transition-colors">
+                    <div className="w-16 h-16 bg-warm-grey/10 rounded overflow-hidden flex-shrink-0">
                       <img
                         src={item.image || "/placeholder-product.jpg"}
                         alt={item.name}
@@ -253,13 +239,13 @@ const Checkout = () => {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-dark-grey dark:text-off-white truncate transition-colors">
+                      <p className="text-sm font-medium text-dark-grey truncate">
                         {item.name}
                       </p>
-                      <p className="text-xs text-muted-slate dark:text-off-white/70 transition-colors">
+                      <p className="text-xs text-muted-slate">
                         Qty: {item.quantity}
                       </p>
-                      <p className="text-sm font-semibold text-dark-grey dark:text-off-white transition-colors">
+                      <p className="text-sm font-semibold text-dark-grey">
                         ₹{(item.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
@@ -268,24 +254,24 @@ const Checkout = () => {
               </div>
 
               {/* Summary Details */}
-              <div className="space-y-2 mb-4 border-t border-muted-slate dark:border-muted-slate/50 pt-3 transition-colors">
-                <div className="flex justify-between text-muted-slate dark:text-off-white/70 text-sm transition-colors">
+              <div className="space-y-2 mb-4 border-t pt-3">
+                <div className="flex justify-between text-muted-slate text-sm">
                   <span>Subtotal</span>
                   <span className="font-semibold">₹{subtotal.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-muted-slate dark:text-off-white/70 text-sm transition-colors">
+                <div className="flex justify-between text-muted-slate text-sm">
                   <span>Shipping</span>
                   <span className="font-semibold">
                     {shipping === 0 ? "Free" : `₹${shipping.toFixed(2)}`}
                   </span>
                 </div>
-                <div className="flex justify-between text-muted-slate dark:text-off-white/70 text-sm transition-colors">
+                <div className="flex justify-between text-muted-slate text-sm">
                   <span>Tax (10%)</span>
                   <span className="font-semibold">₹{tax.toFixed(2)}</span>
                 </div>
 
-                <div className="border-t border-muted-slate dark:border-muted-slate/50 pt-2 transition-colors">
-                  <div className="flex justify-between text-dark-grey dark:text-off-white text-lg font-bold transition-colors">
+                <div className="border-t border-muted-slate pt-2">
+                  <div className="flex justify-between text-dark-grey text-lg font-bold">
                     <span>Total</span>
                     <span>₹{total.toFixed(2)}</span>
                   </div>
@@ -294,7 +280,7 @@ const Checkout = () => {
 
               {/* Payment Button */}
               {!isFormValid() && (
-                <p className="text-xs text-muted-slate dark:text-off-white/70 mb-3 text-center transition-colors">
+                <p className="text-xs text-muted-slate mb-3 text-center">
                   Please fill in all required fields
                 </p>
               )}
@@ -306,7 +292,7 @@ const Checkout = () => {
                 onError={(error) => setPaymentError(error)}
               />
 
-              <p className="text-xs text-muted-slate dark:text-off-white/70 text-center mt-4 transition-colors">
+              <p className="text-xs text-muted-slate text-center mt-4">
                 Secure payment powered by Razorpay
               </p>
             </div>

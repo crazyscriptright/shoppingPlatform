@@ -110,22 +110,22 @@ const initDb = async () => {
     console.log("Cart Items table created with UNIQUE constraint");
 
     // Create admin user
-    const hashedPassword = await bcrypt.hash("admin123", 10);
+    const hashedPassword = await bcrypt.hash("1234567890", 10);
     await pool.query(
       `INSERT INTO users (name, email, password, role) 
        VALUES ($1, $2, $3, $4) 
        ON CONFLICT (email) DO NOTHING`,
-      ["Admin User", "admin@flipcard.com", hashedPassword, "admin"]
+      ["Admin User", "anil@gmail.com", hashedPassword, "admin"]
     );
     console.log("Admin user created");
 
     // Create sample customer
-    const customerPassword = await bcrypt.hash("user123", 10);
+    const customerPassword = await bcrypt.hash("1234567890", 10);
     await pool.query(
       `INSERT INTO users (name, email, password, role) 
        VALUES ($1, $2, $3, $4) 
        ON CONFLICT (email) DO NOTHING`,
-      ["John Doe", "user@flipcard.com", customerPassword, "customer"]
+      ["John Doe", "user@gmail.com", customerPassword, "customer"]
     );
     console.log("Sample customer created");
 
@@ -834,8 +834,8 @@ const initDb = async () => {
 
     console.log("\n✅ Database initialization completed successfully!");
     console.log("\n📝 Login Credentials:");
-    console.log("Admin: admin@flipcard.com / admin123");
-    console.log("Customer: user@flipcard.com / user123");
+    console.log("Admin: anil@gmail.com / 1234567890");
+    console.log("Customer: user@gmail.com / 1234567890");
 
     process.exit(0);
   } catch (error) {

@@ -48,32 +48,28 @@ const Orders = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-dark-grey dark:text-off-white transition-colors">
-          Loading orders...
-        </div>
+      <div className="min-h-screen bg-[#F5F3EF] flex items-center justify-center">
+        <div className="text-dark-grey">Loading orders...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#F5F3EF]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="mb-8">
           <h1
-            className="text-3xl md:text-4xl font-normal text-dark-grey dark:text-off-white mb-2 transition-colors"
+            className="text-3xl md:text-4xl font-normal text-dark-grey mb-2"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             My Orders
           </h1>
-          <p className="text-dark-grey/60 dark:text-off-white/60 transition-colors">
-            Track and manage your orders
-          </p>
+          <p className="text-dark-grey/60">Track and manage your orders</p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="bg-warm-grey/10 dark:bg-muted-slate/20 rounded-lg p-5 mb-6 transition-colors">
+        <div className="bg-warm-grey/10 rounded-lg p-5 mb-6">
           <div className="flex flex-wrap gap-2">
             {[
               "all",
@@ -86,10 +82,10 @@ const Orders = () => {
               <button
                 key={status}
                 onClick={() => setFilter(status)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
                   filter === status
                     ? "bg-soft-teal text-off-white"
-                    : "bg-warm-grey/10 dark:bg-muted-slate/30 text-dark-grey dark:text-off-white hover:bg-warm-grey/20 dark:hover:bg-muted-slate/40"
+                    : "bg-warm-grey/10 text-dark-grey hover:bg-warm-grey/20"
                 }`}
               >
                 {status.charAt(0).toUpperCase() + status.slice(1)}
@@ -100,15 +96,12 @@ const Orders = () => {
 
         {/* Orders List */}
         {filteredOrders.length === 0 ? (
-          <div className="bg-off-white dark:bg-muted-slate rounded-lg p-12 text-center transition-colors">
-            <Package
-              className="mx-auto mb-4 text-warm-grey/40 dark:text-off-white/40 transition-colors"
-              size={64}
-            />
-            <h3 className="text-xl font-medium text-dark-grey dark:text-off-white mb-2 transition-colors">
+          <div className="bg-off-white rounded-lg p-12 text-center">
+            <Package className="mx-auto mb-4 text-warm-grey/40" size={64} />
+            <h3 className="text-xl font-medium text-dark-grey mb-2">
               No orders found
             </h3>
-            <p className="text-dark-grey/60 dark:text-off-white/60 mb-6 transition-colors">
+            <p className="text-dark-grey/60 mb-6">
               {filter === "all"
                 ? "You haven't placed any orders yet."
                 : `You don't have any ${filter} orders.`}
@@ -131,14 +124,14 @@ const Orders = () => {
               return (
                 <div
                   key={order.id}
-                  className="bg-off-white dark:bg-muted-slate rounded-lg transition-colors overflow-hidden"
+                  className="bg-off-white rounded-lg transition overflow-hidden"
                 >
                   {/* Order Header */}
-                  <div className="p-6 border-b border-warm-grey/20 dark:border-muted-slate/30 transition-colors">
+                  <div className="p-6 border-b border-warm-grey/20">
                     <div className="flex flex-wrap items-center justify-between gap-4">
                       <div>
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-lg font-medium text-dark-grey dark:text-off-white transition-colors">
+                          <h3 className="text-lg font-medium text-dark-grey">
                             Order #{order.order_number || order.id}
                           </h3>
                           <span
@@ -149,7 +142,7 @@ const Orders = () => {
                             {displayStatus}
                           </span>
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-dark-grey/60 dark:text-off-white/60 transition-colors">
+                        <div className="flex items-center gap-4 text-sm text-dark-grey/60">
                           <div className="flex items-center gap-1">
                             <Calendar size={14} />
                             <span>
@@ -173,7 +166,7 @@ const Orders = () => {
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="flex items-center gap-1 text-dark-grey dark:text-off-white font-medium mb-1 transition-colors">
+                        <div className="flex items-center gap-1 text-dark-grey font-medium mb-1">
                           <DollarSign size={16} />
                           <span className="text-xl">
                             {parseFloat(order.total_amount || 0).toFixed(2)}
@@ -196,7 +189,7 @@ const Orders = () => {
                       {order.items?.slice(0, 4).map((item, index) => (
                         <div
                           key={index}
-                          className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-warm-grey/10 dark:bg-[#1a1d1e]/50 transition-colors"
+                          className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-warm-grey/10"
                         >
                           <img
                             src={
@@ -208,7 +201,7 @@ const Orders = () => {
                         </div>
                       ))}
                       {order.items?.length > 4 && (
-                        <div className="flex-shrink-0 w-20 h-20 rounded-lg bg-warm-grey/10 dark:bg-[#1a1d1e]/50 flex items-center justify-center text-dark-grey/60 dark:text-off-white/60 text-sm font-medium transition-colors">
+                        <div className="flex-shrink-0 w-20 h-20 rounded-lg bg-warm-grey/10 flex items-center justify-center text-dark-grey/60 text-sm font-medium">
                           +{order.items.length - 4}
                         </div>
                       )}
@@ -216,12 +209,12 @@ const Orders = () => {
                   </div>
 
                   {/* Order Actions */}
-                  <div className="px-6 py-4 bg-warm-grey/5 dark:bg-[#1a1d1e]/30 transition-colors">
+                  <div className="px-6 py-4 bg-warm-grey/5">
                     {deliveryInfo.isDelivered && (
-                      <div className="mb-3 p-3 bg-soft-teal/10 dark:bg-soft-teal/20 border border-soft-teal/30 rounded-lg transition-colors">
+                      <div className="mb-3 p-3 bg-soft-teal/10 border border-soft-teal/30 rounded-lg">
                         <div className="flex items-center justify-between text-sm flex-wrap gap-2">
                           <div>
-                            <span className="font-medium text-dark-grey dark:text-off-white transition-colors">
+                            <span className="font-medium text-dark-grey">
                               Delivered on:{" "}
                             </span>
                             <span className="text-muted-slate">
@@ -249,18 +242,18 @@ const Orders = () => {
                     )}
                     <div className="flex flex-wrap gap-2">
                       {displayStatus?.toLowerCase() === "delivered" && (
-                        <button className="px-4 py-2 text-sm text-dark-grey dark:text-off-white border border-warm-grey/50 dark:border-muted-slate rounded hover:bg-warm-grey/10 dark:hover:bg-muted-slate/20 transition-colors">
+                        <button className="px-4 py-2 text-sm text-dark-grey border border-warm-grey/50 rounded hover:bg-warm-grey/10 transition">
                           Leave Review
                         </button>
                       )}
                       {displayStatus?.toLowerCase() === "pending" && (
-                        <button className="px-4 py-2 text-sm text-muted-slate dark:text-off-white/70 border border-muted-slate/40 rounded hover:bg-muted-slate/10 dark:hover:bg-muted-slate/20 transition-colors">
+                        <button className="px-4 py-2 text-sm text-muted-slate border border-muted-slate/40 rounded hover:bg-muted-slate/10 transition">
                           Cancel Order
                         </button>
                       )}
                       <Link
                         to={`/track-order/${order.id}`}
-                        className="px-4 py-2 text-sm text-dark-grey dark:text-off-white border border-warm-grey/50 dark:border-muted-slate rounded hover:bg-warm-grey/10 dark:hover:bg-muted-slate/20 transition-colors"
+                        className="px-4 py-2 text-sm text-dark-grey border border-warm-grey/50 rounded hover:bg-warm-grey/10 transition"
                       >
                         Track Order
                       </Link>

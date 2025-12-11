@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, TrendingUp, Star } from "lucide-react";
+import { ArrowRight, TrendingUp } from "lucide-react";
 import ProductCard from "../components/ProductCard";
+import CategoryCard from "../components/CategoryCard";
+import FeatureCard from "../components/FeatureCard";
+import SectionHeader from "../components/SectionHeader";
+import LoadingSpinner from "../components/LoadingSpinner";
 import Button from "../components/Button";
 import api from "../services/api";
 
@@ -9,6 +13,98 @@ const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [newArrivals, setNewArrivals] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Category cards data
+  const categoryCards = [
+    {
+      image:
+        "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=400&auto=format&fit=crop",
+      title: "Classic Hat",
+      showArrow: false,
+    },
+    {
+      image:
+        "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&auto=format&fit=crop",
+      title: "Mini Wallet",
+      showArrow: false,
+    },
+    {
+      image:
+        "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&auto=format&fit=crop",
+      title: "Belt Bag",
+      showArrow: false,
+    },
+    {
+      image:
+        "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&auto=format&fit=crop",
+      title: "Shoes",
+      showArrow: true,
+    },
+  ];
+
+  // Feature cards data
+  const features = [
+    {
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 lg:h-8 lg:w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+          />
+        </svg>
+      ),
+      title: "Free Shipping",
+      description: "On orders over ₹50",
+    },
+    {
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 lg:h-8 lg:w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+          />
+        </svg>
+      ),
+      title: "Easy Returns",
+      description: "30-day return policy",
+    },
+    {
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 lg:h-8 lg:w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+          />
+        </svg>
+      ),
+      title: "Secure Payment",
+      description: "100% secure transactions",
+    },
+  ];
 
   useEffect(() => {
     fetchProducts();
@@ -30,24 +126,24 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#F5F3EF]">
       {/* Hero Section */}
-      <section className="relative">
+      <section className="relative bg-[#F5F3EF]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="hero-grid py-8 lg:py-16">
             {/* Left side - Text */}
             <div className="hero-text-container space-y-6 lg:space-y-8">
               <div className="space-y-1">
-                <div className="text-xs tracking-widest text-dark-grey/60 dark:text-off-white/60 transition-colors">
+                <div className="text-xs tracking-widest text-dark-grey/60">
                   D'Florencis
                 </div>
-                <div className="text-xs tracking-wide text-dark-grey/50 dark:text-off-white/50 transition-colors">
+                <div className="text-xs tracking-wide text-dark-grey/50">
                   Hype AAEs
                 </div>
               </div>
 
               <h1
-                className="text-6xl lg:text-7xl xl:text-8xl leading-[1] tracking-tight text-dark-grey dark:text-off-white pr-4 transition-colors"
+                className="text-6xl lg:text-7xl xl:text-8xl leading-[1] tracking-tight text-dark-grey pr-4"
                 style={{
                   fontFamily: "'Playfair Display', Georgia, serif",
                   marginBottom: "0.5rem",
@@ -60,13 +156,13 @@ const Home = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 mt-6">
                 <Link to="/login" className="group">
-                  <div className="relative overflow-hidden bg-soft-teal text-off-white px-8 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300 hover:bg-dark-grey dark:hover:bg-off-white dark:hover:text-dark-grey hover:scale-105 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl">
+                  <div className="relative overflow-hidden bg-soft-teal text-off-white px-8 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300 hover:bg-dark-grey hover:scale-105 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl">
                     <span>Sign Up</span>
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </div>
                 </Link>
                 <Link to="/shop" className="group">
-                  <div className="relative overflow-hidden bg-transparent border border-dark-grey dark:border-off-white text-dark-grey dark:text-off-white px-8 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300 hover:bg-dark-grey hover:text-off-white dark:hover:bg-off-white dark:hover:text-dark-grey hover:scale-105 flex items-center justify-center gap-2">
+                  <div className="relative overflow-hidden bg-transparent border border-dark-grey text-dark-grey px-8 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300 hover:bg-dark-grey hover:text-off-white hover:scale-105 flex items-center justify-center gap-2">
                     <span>Explore</span>
                     <TrendingUp className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
                   </div>
@@ -90,13 +186,13 @@ const Home = () => {
       </section>
 
       {/* New Arrivals Section with Product Cards */}
-      <section className="py-24 lg:py-32 transition-colors">
+      <section className="bg-white py-24 lg:py-32" style={{ padding: 24 }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-6 items-center">
             {/* New Arrival Text */}
             <div className="lg:col-span-1">
               <h2
-                className="text-5xl lg:text-6xl leading-tight text-dark-grey dark:text-off-white transition-colors"
+                className="text-5xl lg:text-6xl leading-tight text-dark-grey"
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 New
@@ -107,98 +203,36 @@ const Home = () => {
 
             {/* Product Cards */}
             <div className="lg:col-span-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-              {/* Classic Hat */}
-              <div className="bg-off-white border border-warm-grey/30 rounded-lg p-4 text-center hover:shadow-lg transition">
-                <div className="aspect-square bg-warm-grey/10 rounded-lg mb-3 flex items-center justify-center overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=400&auto=format&fit=crop"
-                    alt="Classic Hat"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <p className="text-sm text-dark-grey dark:text-off-white font-light transition-colors">
-                  Classic Hat
-                </p>
-              </div>
-
-              {/* Mini Wallet */}
-              <div className="bg-off-white dark:bg-[#1a1d1e] border border-warm-grey/30 dark:border-muted-slate rounded-lg p-4 text-center hover:shadow-lg transition-colors">
-                <div className="aspect-square bg-warm-grey/10 dark:bg-muted-slate/20 rounded-lg mb-3 flex items-center justify-center overflow-hidden transition-colors">
-                  <img
-                    src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&auto=format&fit=crop"
-                    alt="Mini Wallet"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <p className="text-sm text-dark-grey dark:text-off-white font-light transition-colors">
-                  Mini Wallet
-                </p>
-              </div>
-
-              {/* Belt Bag */}
-              <div className="bg-off-white dark:bg-[#1a1d1e] border border-warm-grey/30 dark:border-muted-slate rounded-lg p-4 text-center hover:shadow-lg transition-colors">
-                <div className="aspect-square bg-warm-grey/10 dark:bg-muted-slate/20 rounded-lg mb-3 flex items-center justify-center overflow-hidden transition-colors">
-                  <img
-                    src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&auto=format&fit=crop"
-                    alt="Belt Bag"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <p className="text-sm text-dark-grey dark:text-off-white font-light transition-colors">
-                  Belt Bag
-                </p>
-              </div>
-
-              {/* Shoes with Arrow */}
-              <div className="bg-off-white dark:bg-[#1a1d1e] border border-warm-grey/30 dark:border-muted-slate rounded-lg p-4 text-center hover:shadow-lg transition-colors relative">
-                <div className="aspect-square bg-warm-grey/10 dark:bg-muted-slate/20 rounded-lg mb-3 flex items-center justify-center overflow-hidden transition-colors">
-                  <img
-                    src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&auto=format&fit=crop"
-                    alt="Shoes"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="flex items-center justify-center gap-2">
-                  <p className="text-sm text-dark-grey dark:text-off-white font-light transition-colors">
-                    Shoes
-                  </p>
-                  <ArrowRight
-                    size={16}
-                    className="text-dark-grey dark:text-off-white transition-colors"
-                  />
-                </div>
-              </div>
+              {categoryCards.map((card, index) => (
+                <CategoryCard
+                  key={index}
+                  image={card.image}
+                  title={card.title}
+                  showArrow={card.showArrow}
+                />
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured Products */}
-      <section className="py-12 lg:py-16">
+      <section className="py-12 lg:py-16 bg-[#F5F3EF]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 lg:mb-12 gap-4">
-            <div>
-              <h2
-                className="text-3xl md:text-4xl lg:text-5xl font-normal text-dark-grey dark:text-off-white leading-tight transition-colors"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              >
-                Featured Products
-              </h2>
-              <p className="text-dark-grey/60 dark:text-off-white/60 mt-1 text-sm lg:text-base font-light transition-colors">
-                Handpicked favorites just for you
-              </p>
-            </div>
-            <Link to="/shop?featured=true">
-              <Button variant="outline" size="sm">
-                View All
-              </Button>
-            </Link>
-          </div>
+          <SectionHeader
+            title="Featured Products"
+            subtitle="Handpicked favorites just for you"
+            action={
+              <Link to="/shop?featured=true">
+                <Button variant="outline" size="sm">
+                  View All
+                </Button>
+              </Link>
+            }
+          />
 
           {loading ? (
-            <div className="flex justify-center items-center py-20">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-soft-teal"></div>
-            </div>
+            <LoadingSpinner />
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
               {featuredProducts.map((product) => (
@@ -233,93 +267,17 @@ const Home = () => {
       </section> */}
 
       {/* Features Section */}
-      <section
-        className="py-12 lg:py-16 bg-off-white dark:bg-muted-slate transition-colors"
-        style={{ padding: 24 }}
-      >
+      <section className="py-12 lg:py-16 bg-off-white" style={{ padding: 24 }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 text-center">
-            <div className="p-4 lg:p-6">
-              <div className="bg-soft-teal text-off-white w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center mx-auto mb-3 lg:mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 lg:h-8 lg:w-8"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-                  />
-                </svg>
-              </div>
-              <h3
-                className="text-lg lg:text-xl font-normal text-dark-grey dark:text-off-white mb-1 lg:mb-2 transition-colors"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              >
-                Free Shipping
-              </h3>
-              <p className="text-sm lg:text-base text-dark-grey/60 dark:text-off-white/60 font-light transition-colors">
-                On orders over ₹50
-              </p>
-            </div>
-            <div className="p-4 lg:p-6">
-              <div className="bg-soft-teal text-off-white w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center mx-auto mb-3 lg:mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 lg:h-8 lg:w-8"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                  />
-                </svg>
-              </div>
-              <h3
-                className="text-lg lg:text-xl font-normal text-dark-grey dark:text-off-white mb-1 lg:mb-2 transition-colors"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              >
-                Easy Returns
-              </h3>
-              <p className="text-sm lg:text-base text-dark-grey/60 dark:text-off-white/60 font-light transition-colors">
-                30-day return policy
-              </p>
-            </div>
-            <div className="p-4 lg:p-6">
-              <div className="bg-soft-teal text-off-white w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center mx-auto mb-3 lg:mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 lg:h-8 lg:w-8"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  />
-                </svg>
-              </div>
-              <h3
-                className="text-lg lg:text-xl font-normal text-dark-grey dark:text-off-white mb-1 lg:mb-2 transition-colors"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              >
-                Secure Payment
-              </h3>
-              <p className="text-sm lg:text-base text-dark-grey/60 dark:text-off-white/60 font-light transition-colors">
-                100% secure transactions
-              </p>
-            </div>
+            {features.map((feature, index) => (
+              <FeatureCard
+                key={index}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+              />
+            ))}
           </div>
         </div>
       </section>

@@ -33,7 +33,7 @@ const TrackOrder = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-[#F5F3EF] flex items-center justify-center">
         <div className="text-dark-grey">Loading order details...</div>
       </div>
     );
@@ -41,7 +41,7 @@ const TrackOrder = () => {
 
   if (!order) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-[#F5F3EF] flex items-center justify-center">
         <div className="text-center">
           <Package className="mx-auto mb-4 text-warm-grey/40" size={64} />
           <h3 className="text-xl font-medium text-dark-grey mb-2">
@@ -105,7 +105,7 @@ const TrackOrder = () => {
       : order.shipping_address;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#F5F3EF]">
       <div className="max-w-4xl mx-auto px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="mb-8">
@@ -127,7 +127,7 @@ const TrackOrder = () => {
         </div>
 
         {/* Order Status Card */}
-        <div className="bg-white rounded-lg  p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-xl font-medium text-dark-grey">
@@ -237,7 +237,7 @@ const TrackOrder = () => {
         </div>
 
         {/* Shipping Address */}
-        <div className="bg-white rounded-lg  p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <h2 className="text-lg font-medium text-dark-grey mb-4">
             Shipping Address
           </h2>
@@ -254,7 +254,7 @@ const TrackOrder = () => {
         </div>
 
         {/* Order Items */}
-        <div className="bg-white rounded-lg  p-6">
+        <div className="bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-lg font-medium text-dark-grey mb-4">
             Order Items
           </h2>

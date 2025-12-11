@@ -18,6 +18,10 @@ router.get("/", async (req, res) => {
       offset = 0,
     } = req.query;
 
+    // Validate and parse numeric values
+    const parsedLimit = parseInt(limit) || 50;
+    const parsedOffset = parseInt(offset) || 0;
+
     let query = "SELECT * FROM products WHERE 1=1";
     const params = [];
     let paramCount = 1;
@@ -60,7 +64,7 @@ router.get("/", async (req, res) => {
     }
 
     query += ` LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
-    params.push(limit, offset);
+    params.push(parsedLimit, parsedOffset);
 
     const result = await pool.query(query, params);
     res.json({ products: result.rows });
